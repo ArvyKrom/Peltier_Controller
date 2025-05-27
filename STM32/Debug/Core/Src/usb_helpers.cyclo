@@ -1,0 +1,4 @@
+../Core/Src/usb_helpers.c:7:6:send_temps_via_usb	1
+../Core/Src/usb_helpers.c:13:6:listen_for_temp_change_sent_via_usb	3
+../Core/Src/usb_helpers.c:24:5:string_to_double	3
+../Core/Src/usb_helpers.c:35:5:put_temps_into_char_array	1
