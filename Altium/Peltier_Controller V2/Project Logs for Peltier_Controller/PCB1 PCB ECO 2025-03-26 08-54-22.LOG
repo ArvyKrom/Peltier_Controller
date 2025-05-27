@@ -1,0 +1,28 @@
+Removed Pin From Net: NetName=D+ Pin=D1-4
+Removed Pin From Net: NetName=D- Pin=D1-6
+Removed Pin From Net: NetName=D- Pin=U1-37
+Removed Pin From Net: NetName=D+ Pin=U1-38
+Change Component Description : Designator=J1 Old Description=PCB Terminal Screw 2.54mm 20AWG 160V 6A 2 Position COMBICON MPT Series New Description=PCB Terminal Screw 2.54mm 20AWG 160V 6A 2 Position COMBICON MPT Series | Phoenix Contact 1725656
+Change Component Description : Designator=J4 Old Description=PCB Terminal Screw 2.54mm 20AWG 160V 6A 2 Position COMBICON MPT Series New Description=PCB Terminal Screw 2.54mm 20AWG 160V 6A 2 Position COMBICON MPT Series | Phoenix Contact 1725656
+Change Component Description : Designator=J7 Old Description=PCB Terminal Screw 2.54mm 20AWG 160V 6A 2 Position COMBICON MPT Series New Description=PCB Terminal Screw 2.54mm 20AWG 160V 6A 2 Position COMBICON MPT Series | Phoenix Contact 1725656
+Added Component: Designator=L4(IND_SRR6038-180Y)
+Add component (AddParameter): Name = "Check_prices"; Value = "https://www.snapeda.com/parts/SRR6038-180Y/Bourns/view-part/?ref=eda"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MF"; Value = "Bourns"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MP"; Value = "SRR6038-180Y"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "NON STANDARD-2 Bourns"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "SnapEDA_Link"; Value = "https://www.snapeda.com/parts/SRR6038-180Y/Bourns/view-part/?ref=snap"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Added Pin To Net: NetName=NetC33_2 Pin=L4-1
+Added Pin To Net: NetName=NetC34_2 Pin=L4-2
+Added Pin To Net: NetName=NetD1_4 Pin=D1-4
+Added Pin To Net: NetName=NetD1_4 Pin=U1-38
+Added Net: Name=NetD1_4
+Added Pin To Net: NetName=NetD1_6 Pin=D1-6
+Added Pin To Net: NetName=NetD1_6 Pin=U1-37
+Added Net: Name=NetD1_6
+Added Member To Class: ClassName=Sheet1 Member=Component D1 USBLC6-2SC6Y
+Added Member To Class: ClassName=Sheet2 Member=Component L4 18uH
+Added Member To Class: ClassName=Sheet1 Member=Component R5 22.1kO
+Added Member To Class: ClassName=Sheet1 Member=Component R6 30kO
+Added Member To Class: ClassName=Sheet1 Member=Component R8 5.1kO
+Added Member To Class: ClassName=Sheet1 Member=Component R11 5.1kO

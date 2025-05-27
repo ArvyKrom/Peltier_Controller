@@ -1,0 +1,34 @@
+Change Component Footprint: Designator=L1 Old Footprint=0603 New Footprint=10uH 0805
+Change Component Comment : Designator=L1 Old Comment=10nH New Comment=10uH
+Added Component: Designator=S1(FSM2J_1)
+Add component (AddParameter): Name = "Check_prices"; Value = "https://www.snapeda.com/parts/FSM2JSMAATR/TE+Connectivity+ALCOSWITCH+Switches/view-part/?ref=eda"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MF"; Value = "TE Connectivity"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MP"; Value = "FSM2JSMAATR"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "None"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "SnapEDA_Link"; Value = "https://www.snapeda.com/parts/FSM2JSMAATR/TE+Connectivity+ALCOSWITCH+Switches/view-part/?ref=snap"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Added Pin To Net: NetName=3V3 Pin=R1-1
+Added Pin To Net: NetName=GND Pin=S1-1
+Added Pin To Net: NetName=GND Pin=S1-2
+Added Pin To Net: NetName=NetS1_3 Pin=S1-3
+Added Pin To Net: NetName=NetS1_3 Pin=S1-4
+Added Pin To Net: NetName=NetL1_2 Pin=L1-2
+Added Pin To Net: NetName=NetL1_2 Pin=L2-1
+Added Net: Name=NetL1_2
+Added Member To Class: ClassName=Sheet1 Member=Component C1 100nF
+Added Member To Class: ClassName=Sheet1 Member=Component C2 100nF
+Added Member To Class: ClassName=Sheet1 Member=Component C3 100nF
+Added Member To Class: ClassName=Sheet1 Member=Component C4 100nF
+Added Member To Class: ClassName=Sheet1 Member=Component C5 100nF
+Added Member To Class: ClassName=Sheet1 Member=Component C6 4.7uF
+Added Member To Class: ClassName=Sheet1 Member=Component C7 100nF
+Added Member To Class: ClassName=Sheet1 Member=Component C8 100nF
+Added Member To Class: ClassName=Sheet1 Member=Component C9 100nF
+Added Member To Class: ClassName=Sheet1 Member=Component C10 100nF
+Added Member To Class: ClassName=Sheet1 Member=Component C11 100nF
+Added Member To Class: ClassName=Sheet1 Member=Component C12 4.7uF
+Added Member To Class: ClassName=Sheet1 Member=Component C13 30pF
+Added Member To Class: ClassName=Sheet1 Member=Component C14 30pF
+Added Member To Class: ClassName=Sheet1 Member=Component C15 4.7uF
+Added Member To Class: ClassName=Sheet1 Member=Component S1 FSM2JSMAATR
+Added Member To Class: ClassName=Sheet1 Member=Component U1 STM32WB55RGV7

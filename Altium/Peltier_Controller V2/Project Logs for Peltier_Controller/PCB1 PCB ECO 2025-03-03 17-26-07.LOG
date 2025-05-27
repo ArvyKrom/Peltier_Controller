@@ -1,0 +1,38 @@
+Removed Pin From Net: NetName=D- Pin=D1-1
+Removed Pin From Net: NetName=GND Pin=D1-2
+Removed Pin From Net: NetName=D+ Pin=D1-3
+Removed Pin From Net: NetName=D+ Pin=D1-4
+Removed Pin From Net: NetName=D- Pin=D1-6
+Removed Member From Class: ClassName=Sheet1 Member=D1
+Added Component: Designator=D?(USB ESD protection)
+Add component (AddParameter): Name = "Check_prices"; Value = "https://www.snapeda.com/parts/USBLC6-2SC6Y/STMicroelectronics/view-part/?ref=eda"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MF"; Value = "STMicroelectronics"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MP"; Value = "USBLC6-2SC6Y"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "SOT-23-6 STMicroelectronics"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "SnapEDA_Link"; Value = "https://www.snapeda.com/parts/USBLC6-2SC6Y/STMicroelectronics/view-part/?ref=snap"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Added Pin To Net: NetName=D- Pin=D?-1
+Added Pin To Net: NetName=GND Pin=D?-2
+Added Pin To Net: NetName=D+ Pin=D?-3
+Added Pin To Net: NetName=D+ Pin=D?-4
+Added Pin To Net: NetName=D- Pin=D?-6
+Added Pin To Net: NetName=NRST Pin=R1-1
+Added Pin To Net: NetName=NetC20_2 Pin=R2-1
+Added Pin To Net: NetName=NetR3_1 Pin=R3-1
+Added Pin To Net: NetName=NetR3_1 Pin=R4-1
+Added Pin To Net: NetName=NetJ3_A4 Pin=R5-1
+Added Pin To Net: NetName=VBUS_SEN Pin=R6-1
+Added Pin To Net: NetName=NetR7_1 Pin=R7-1
+Added Pin To Net: NetName=NetJ3_A5 Pin=R8-1
+Added Pin To Net: NetName=GND Pin=R9-1
+Added Pin To Net: NetName=GND Pin=R10-1
+Added Pin To Net: NetName=NetJ3_B5 Pin=R11-1
+Added Pin To Net: NetName=UpBtn Pin=R12-1
+Added Pin To Net: NetName=DownBtn Pin=R13-1
+Added Pin To Net: NetName=GND Pin=R14-1
+Added Pin To Net: NetName=NetC34_2 Pin=R15-1
+Added Pin To Net: NetName=NetC34_2 Pin=R16-1
+Added Pin To Net: NetName=GND Pin=R17-1
+Added Pin To Net: NetName=NetJ5_1 Pin=R18-1
+Added Pin To Net: NetName=NetJ6_1 Pin=R19-1
+Added Member To Class: ClassName=Sheet1 Member=Component D? USBLC6-2SC6Y

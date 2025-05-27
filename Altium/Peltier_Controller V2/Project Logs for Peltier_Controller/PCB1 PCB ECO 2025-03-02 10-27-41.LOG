@@ -1,0 +1,85 @@
+Removed Pin From Net: NetName=NetC13_3 Pin=S1-3
+Removed Pin From Net: NetName=NetC13_3 Pin=S1-4
+Removed Pin From Net: NetName=3V3 Pin=U1-1
+Removed Pin From Net: NetName=NetC13_3 Pin=U1-8
+Removed Pin From Net: NetName=3V3 Pin=U1-13
+Removed Pin From Net: NetName=3V3 Pin=U1-14
+Removed Pin From Net: NetName=3V3 Pin=U1-30
+Removed Pin From Net: NetName=GND Pin=U1-32
+Removed Pin From Net: NetName=3V3 Pin=U1-33
+Removed Pin From Net: NetName=NetC14_3 Pin=U1-41
+Removed Pin From Net: NetName=GND Pin=U1-42
+Removed Pin From Net: NetName=NetL1_1 Pin=U1-43
+Removed Pin From Net: NetName=3V3 Pin=U1-44
+Removed Pin From Net: NetName=3V3 Pin=U1-45
+Removed Pin From Net: NetName=3V3 Pin=U1-55
+Removed Pin From Net: NetName=3V3 Pin=U1-68
+Removed Pin From Net: NetName=GND Pin=U1-69
+Added Component: Designator=C1(0603)
+Added Component: Designator=C15(0603)
+Added Component: Designator=U1(QFN40P800X800X100-69N)
+Add component (AddParameter): Name = "Availability"; Value = "In Stock"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Check_prices"; Value = "https://www.snapeda.com/parts/STM32WB55RGV7/STMicroelectronics/view-part/?ref=eda"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MF"; Value = "STMicroelectronics"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MP"; Value = "STM32WB55RGV7"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "VFQFN-68 STMicroelectronics"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Price"; Value = "None"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Purchase-URL"; Value = "https://pricing.snapeda.com/search?q=STM32WB55RGV7&ref=eda"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "SnapEDA_Link"; Value = "https://www.snapeda.com/parts/STM32WB55RGV7/STMicroelectronics/view-part/?ref=snap"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=Y1(XTAL_ABM8AIG-8.000MHZ-8-V1R-T)
+Add component (AddParameter): Name = "Availability"; Value = "In Stock"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Check_prices"; Value = "https://www.snapeda.com/parts/ABM8AIG-8.000MHZ-8-V1R-T/Abracon+LLC/view-part/?ref=eda"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MF"; Value = "Abracon LLC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MP"; Value = "ABM8AIG-8.000MHZ-8-V1R-T"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "SMD-4 Abracon LLC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Price"; Value = "None"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Purchase-URL"; Value = "https://pricing.snapeda.com/search/part/ABM8AIG-8.000MHZ-8-V1R-T/?ref=eda"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "SnapEDA_Link"; Value = "https://www.snapeda.com/parts/ABM8AIG-8.000MHZ-8-V1R-T/Abracon+LLC/view-part/?ref=snap"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=C1-2
+Add Pin To Net: Unknown Pin: Pin C2-3
+Add Pin To Net: Unknown Pin: Pin C3-3
+Add Pin To Net: Unknown Pin: Pin C4-3
+Add Pin To Net: Unknown Pin: Pin C5-3
+Add Pin To Net: Unknown Pin: Pin C6-3
+Add Pin To Net: Unknown Pin: Pin C7-3
+Add Pin To Net: Unknown Pin: Pin C8-3
+Add Pin To Net: Unknown Pin: Pin C9-3
+Add Pin To Net: Unknown Pin: Pin C10-3
+Add Pin To Net: Unknown Pin: Pin C11-3
+Add Pin To Net: Unknown Pin: Pin C12-3
+Add Pin To Net: Unknown Pin: Pin C13-3
+Add Pin To Net: Unknown Pin: Pin C14-3
+Added Pin To Net: NetName=GND Pin=C15-2
+Added Pin To Net: NetName=NetC13_3 Pin=R1-1
+Added Pin To Net: NetName=3V3 Pin=U1-1
+Added Pin To Net: NetName=3V3 Pin=U1-13
+Added Pin To Net: NetName=3V3 Pin=U1-14
+Added Pin To Net: NetName=3V3 Pin=U1-30
+Added Pin To Net: NetName=GND Pin=U1-32
+Added Pin To Net: NetName=3V3 Pin=U1-33
+Added Pin To Net: NetName=NetC14_3 Pin=U1-41
+Added Pin To Net: NetName=GND Pin=U1-42
+Added Pin To Net: NetName=NetL1_1 Pin=U1-43
+Added Pin To Net: NetName=3V3 Pin=U1-44
+Added Pin To Net: NetName=3V3 Pin=U1-45
+Added Pin To Net: NetName=3V3 Pin=U1-55
+Added Pin To Net: NetName=3V3 Pin=U1-68
+Added Pin To Net: NetName=GND Pin=U1-69
+Added Pin To Net: NetName=GND Pin=Y1-2
+Added Pin To Net: NetName=GND Pin=Y1-4
+Added Pin To Net: NetName=NetC1_3 Pin=U1-35
+Added Pin To Net: NetName=NetC1_3 Pin=Y1-1
+Added Net: Name=NetC1_3
+Added Pin To Net: NetName=NetC15_3 Pin=U1-34
+Added Pin To Net: NetName=NetC15_3 Pin=Y1-3
+Added Net: Name=NetC15_3
+Add Net: Net with name "NetL1_1" already exists
+Added Pin To Net: NetName=NetS1_3 Pin=S1-3
+Added Pin To Net: NetName=NetS1_3 Pin=S1-4
+Added Pin To Net: NetName=NetS1_3 Pin=U1-8
+Added Net: Name=NetS1_3
+Added Member To Class: ClassName=Sheet1 Member=Component C1 30pF
+Added Member To Class: ClassName=Sheet1 Member=Component C15 30pF
+Added Member To Class: ClassName=Sheet1 Member=Component Y1 ABM8AIG-8MHZ

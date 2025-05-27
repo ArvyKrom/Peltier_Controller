@@ -1,0 +1,46 @@
+Removed Pin From Net: NetName=NetC34_2 Pin=J7-01
+Removed Pin From Net: NetName=GND Pin=J7-02
+Removed Pin From Net: NetName=OLED_RS Pin=J7-03
+Removed Pin From Net: NetName=OLED_E Pin=J7-05
+Removed Pin From Net: NetName=GND Pin=J7-06
+Removed Pin From Net: NetName=OLED_D05 Pin=J7-11
+Removed Pin From Net: NetName=OLED_D04 Pin=J7-12
+Removed Pin From Net: NetName=OLED_D07 Pin=J7-13
+Removed Pin From Net: NetName=OLED_D06 Pin=J7-14
+Removed Member From Class: ClassName=Sheet2 Member=J7
+Added Component: Designator=J?(16 pin header)
+Add component (AddParameter): Name = "Availability"; Value = "Unavailable"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MF"; Value = "Samtec"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MP"; Value = "SSQ-108-XX-X-D"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "None"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Price"; Value = "None"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Added Pin To Net: NetName=NetC34_2 Pin=J?-01
+Added Pin To Net: NetName=GND Pin=J?-02
+Added Pin To Net: NetName=OLED_RS Pin=J?-03
+Added Pin To Net: NetName=OLED_E Pin=J?-05
+Added Pin To Net: NetName=GND Pin=J?-06
+Added Pin To Net: NetName=OLED_D05 Pin=J?-11
+Added Pin To Net: NetName=OLED_D04 Pin=J?-12
+Added Pin To Net: NetName=OLED_D07 Pin=J?-13
+Added Pin To Net: NetName=OLED_D06 Pin=J?-14
+Added Pin To Net: NetName=3V3 Pin=R1-1
+Added Pin To Net: NetName=3V3 Pin=R2-1
+Added Pin To Net: NetName=NetC20_2 Pin=R3-1
+Added Pin To Net: NetName=GND Pin=R4-1
+Added Pin To Net: NetName=VBUS_SEN Pin=R5-1
+Added Pin To Net: NetName=GND Pin=R6-1
+Added Pin To Net: NetName=NetD2_A Pin=R7-1
+Added Pin To Net: NetName=GND Pin=R8-1
+Added Pin To Net: NetName=NetR9_1 Pin=R9-1
+Added Pin To Net: NetName=NetR10_1 Pin=R10-1
+Added Pin To Net: NetName=GND Pin=R11-1
+Added Pin To Net: NetName=3V3 Pin=R12-1
+Added Pin To Net: NetName=3V3 Pin=R13-1
+Added Pin To Net: NetName=NetR14_1 Pin=R14-1
+Added Pin To Net: NetName=NetR16_1 Pin=R16-1
+Added Pin To Net: NetName=NetR16_1 Pin=R17-1
+Added Pin To Net: NetName=UpBtn Pin=R18-1
+Added Pin To Net: NetName=DownBtn Pin=R19-1
+Added Pin To Net: NetName=NetC35_2 Pin=R20-1
+Added Member To Class: ClassName=Sheet2 Member=Component J? DS1023-2*8S21

@@ -1,0 +1,12 @@
+Removed Pin From Net: NetName=GND Pin=J10-01
+Removed Pin From Net: NetName=NetC22_2 Pin=J10-02
+Removed Pin From Net: NetName=OLED_RS Pin=J10-04
+Removed Pin From Net: NetName=GND Pin=J10-05
+Removed Pin From Net: NetName=OLED_E Pin=J10-06
+Added Pin To Net: NetName=NetC22_2 Pin=J10-01
+Added Pin To Net: NetName=GND Pin=J10-02
+Added Pin To Net: NetName=OLED_RS Pin=J10-03
+Added Pin To Net: NetName=OLED_E Pin=J10-05
+Added Pin To Net: NetName=OLED_RW Pin=J10-06
+Added Pin To Net: NetName=OLED_RW Pin=U1-42
+Added Net: Name=OLED_RW

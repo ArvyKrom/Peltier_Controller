@@ -1,0 +1,15 @@
+Removed Pin From Net: NetName=NetD1_6 Pin=U4-52
+Removed Pin From Net: NetName=NetD1_4 Pin=U4-53
+Removed Pin From Net: NetName=VBUS_SEN Pin=U4-54
+Removed Member From Class: ClassName=Sheet1 Member=U4
+Added Pin To Net: NetName=3V3 Pin=R1-1
+Added Pin To Net: NetName=NetC20_2 Pin=R2-1
+Added Pin To Net: NetName=NetR3_1 Pin=R3-1
+Added Pin To Net: NetName=NetR3_1 Pin=R4-1
+Added Pin To Net: NetName=VBUS_SEN Pin=R5-1
+Added Pin To Net: NetName=GND Pin=R6-1
+Added Pin To Net: NetName=GND Pin=R7-1
+Added Pin To Net: NetName=GND Pin=R8-1
+Added Pin To Net: NetName=NetD1_6 Pin=U1-52
+Added Pin To Net: NetName=NetD1_4 Pin=U1-53
+Added Pin To Net: NetName=VBUS_SEN Pin=U1-54

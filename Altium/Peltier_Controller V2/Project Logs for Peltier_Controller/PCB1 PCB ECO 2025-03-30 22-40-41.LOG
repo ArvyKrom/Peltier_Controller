@@ -1,0 +1,39 @@
+Removed Pin From Net: NetName=LDR Pin=L1-1
+Removed Pin From Net: NetName=NetJ3_1 Pin=L1-2
+Removed Pin From Net: NetName=NetJ3_2 Pin=L1-3
+Removed Pin From Net: NetName=SFB Pin=L1-4
+Removed Member From Class: ClassName=Sheet2 Member=C12
+Removed Member From Class: ClassName=Sheet2 Member=C13
+Removed Member From Class: ClassName=Sheet2 Member=J2
+Removed Member From Class: ClassName=Sheet2 Member=J7
+Removed Member From Class: ClassName=Sheet2 Member=R8
+Removed Member From Class: ClassName=Sheet1 Member=R16
+Added Pin To Net: NetName=NetJ3_2 Pin=L1-1
+Added Pin To Net: NetName=SFB Pin=L1-2
+Added Pin To Net: NetName=LDR Pin=L1-3
+Added Pin To Net: NetName=NetJ3_1 Pin=L1-4
+Added Member To Class: ClassName=Sheet1 Member=Component C4 100nF
+Added Member To Class: ClassName=Sheet1 Member=Component C13 100nF
+Added Member To Class: ClassName=Sheet1 Member=Component C14 4,7 uF
+Added Member To Class: ClassName=Sheet2 Member=Component C18 100nF
+Added Member To Class: ClassName=Sheet2 Member=Component C19 100nF
+Added Member To Class: ClassName=Sheet2 Member=Component C20 4.7uF
+Added Member To Class: ClassName=Sheet2 Member=Component C21 100nF
+Added Member To Class: ClassName=Sheet2 Member=Component C25 100nF
+Added Member To Class: ClassName=Sheet1 Member=Component D2 USBLC6-2SC6Y
+Added Member To Class: ClassName=Sheet1 Member=Component J4 1725656
+Added Member To Class: ClassName=Sheet1 Member=Component J5 1 pin header
+Added Member To Class: ClassName=Sheet1 Member=Component J6 1725656
+Added Member To Class: ClassName=Sheet2 Member=Component J8 22-28-4060
+Added Member To Class: ClassName=Sheet2 Member=Component J9 694106105102
+Added Member To Class: ClassName=Sheet2 Member=Component J10 DS1023-2*8S21
+Added Member To Class: ClassName=Sheet2 Member=Component J11 55932-0410
+Added Member To Class: ClassName=Sheet2 Member=Component J12 GND Border
+Added Member To Class: ClassName=Sheet1 Member=Component R2 30kO
+Added Member To Class: ClassName=Sheet1 Member=Component R5 1kO
+Added Member To Class: ClassName=Sheet1 Member=Component R7 5.1kO
+Added Member To Class: ClassName=Sheet2 Member=Component R10 100kO
+Added Member To Class: ClassName=Sheet2 Member=Component R12 1kO
+Added Member To Class: ClassName=Sheet2 Member=Component R17 51kO
+Added Member To Class: ClassName=Sheet2 Member=Component R18 22.1kO
+Added Member To Class: ClassName=Sheet2 Member=Component U5 TPS560430X3FDBVR

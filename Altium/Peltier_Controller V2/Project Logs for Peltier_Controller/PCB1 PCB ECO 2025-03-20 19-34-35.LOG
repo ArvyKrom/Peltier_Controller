@@ -1,0 +1,47 @@
+Added Component: Designator=J3(HRS_CX70M-24P1)
+Add component (AddParameter): Name = "Check_prices"; Value = "https://www.snapeda.com/parts/CX70M-24P1/Hirose/view-part/?ref=eda"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MF"; Value = "Hirose Connector"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MP"; Value = "CX70M-24P1"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "None"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "SnapEDA_Link"; Value = "https://www.snapeda.com/parts/CX70M-24P1/Hirose/view-part/?ref=snap"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=J3-A1
+Added Pin To Net: NetName=NetJ3_A4 Pin=J3-A4
+Added Pin To Net: NetName=NetJ3_A5 Pin=J3-A5
+Added Pin To Net: NetName=D+ Pin=J3-A6
+Added Pin To Net: NetName=D- Pin=J3-A7
+Added Pin To Net: NetName=NetJ3_A4 Pin=J3-A9
+Added Pin To Net: NetName=GND Pin=J3-A12
+Added Pin To Net: NetName=GND Pin=J3-B1
+Added Pin To Net: NetName=NetJ3_A4 Pin=J3-B4
+Added Pin To Net: NetName=NetJ3_B5 Pin=J3-B5
+Added Pin To Net: NetName=D+ Pin=J3-B6
+Added Pin To Net: NetName=D- Pin=J3-B7
+Added Pin To Net: NetName=NetJ3_A4 Pin=J3-B9
+Added Pin To Net: NetName=GND Pin=J3-B12
+Added Pin To Net: NetName=GND Pin=J3-S1
+Added Pin To Net: NetName=GND Pin=J3-S2
+Added Pin To Net: NetName=GND Pin=J3-S3
+Added Pin To Net: NetName=GND Pin=J3-S4
+Added Pin To Net: NetName=GND Pin=J3-S5
+Added Pin To Net: NetName=GND Pin=J3-S6
+Added Pin To Net: NetName=NRST Pin=R1-1
+Added Pin To Net: NetName=NetC20_2 Pin=R2-1
+Added Pin To Net: NetName=NetR3_1 Pin=R3-1
+Added Pin To Net: NetName=NetR3_1 Pin=R4-1
+Added Pin To Net: NetName=NetJ3_A4 Pin=R5-1
+Added Pin To Net: NetName=VBUS_SEN Pin=R6-1
+Added Pin To Net: NetName=NetR7_1 Pin=R7-1
+Added Pin To Net: NetName=NetJ3_B5 Pin=R8-1
+Added Pin To Net: NetName=GND Pin=R9-1
+Added Pin To Net: NetName=GND Pin=R10-1
+Added Pin To Net: NetName=NetJ3_A5 Pin=R11-1
+Added Pin To Net: NetName=UpBtn Pin=R12-1
+Added Pin To Net: NetName=DownBtn Pin=R13-1
+Added Pin To Net: NetName=GND Pin=R14-1
+Added Pin To Net: NetName=NetC34_2 Pin=R16-1
+Added Pin To Net: NetName=GND Pin=R17-1
+Added Pin To Net: NetName=NetR18_1 Pin=R18-1
+Added Pin To Net: NetName=NetR19_1 Pin=R19-1
+Added Pin To Net: NetName=NetR20_1 Pin=R20-1
+Added Member To Class: ClassName=Sheet1 Member=Component J3 CX70M-24P1

@@ -1,0 +1,4 @@
+Change Component Description : Designator=L4 Old Description=Ind6.8x6.8x3.8mm,18uH30%1.5A,shdSMD New Description=Ind6.8x6.8x3.8mm,18uH30%1.5A,shdSMD | Bourns SRR6038-180Y
+Change Component Description : Designator=J4 Old Description=PCB Terminal Screw 2.54mm 20AWG 160V 6A 2 Position COMBICON MPT Series New Description=PCB Terminal Screw 2.54mm 20AWG 160V 6A 2 Position COMBICON MPT Series | Phoenix Contact 1725656
+Added Pin To Net: NetName=NetJ3_A4 Pin=D1-5
+Change Net Name : Old Net Name=NetJ3_A4 New Net Name=NetD1_5

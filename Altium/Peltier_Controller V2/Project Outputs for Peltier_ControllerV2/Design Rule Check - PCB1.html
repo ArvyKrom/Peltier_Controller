@@ -1,0 +1,546 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 9em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD25\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">2025-04-24</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:33:05</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:01</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc" class="file"><acronym title="C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc">C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">61</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Waived Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">2</td></tr>
+</table>
+</td>
+</table><a name="IDAKMUMPDNZIQ0PGNKTBBQ3MTGCGWTFCNWYPIGAOES2EX4Q3XAX0FG"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDAICIKVISO2FJHME1TNYEPVCD4FDKGGNZZDWSZAG4KBFSJJIDPGHL">Clearance Constraint (Gap=0.1mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDHA22N45OM1EMMCP4MKABLABIOMQCYZG0H5K0UOJQTAJ3A3ONLDJH">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID0VCXEC5WRQJPPFXXMLBXZ3ZQECBLDZP0W40EIAKHF0DHWAEW4UVH">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDYQ1RCJOYFT1MU4WZBEBQR342F5SZ4FRBUPE5V0KZQB3MMMV3BP">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID3VLN4OYOY1TLETCYJKLOJEAZOBTJ1ZXP305JIVIR4331LJB25E3O">Width Constraint (Min=0.1mm) (Max=2mm) (Preferred=0.3mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID4UF0KEXOU22XHT0ZV040YA1AFG0DZ0Y3DE0KHJOPDWYNLNNPQ0HJ">Routing Topology Rule(Topology=Shortest) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID22YLGEOOKS5NL5ALNNUJBZ1D5PMNMZP1MY0NXIN0BOIDK2LHRBLI">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDVDCG1NYF5YXLOEWGI4PHVN1IFFMY3FLNEBWIASFRGIBRZVMFUX3B">Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDZVO3CHQWZ0QZFK4QAAR4FTEVXPJR3NDR0JNDVFP5K34BWJKZREMF">Hole To Hole Clearance (Gap=0.2mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDMRSXR1AGEAFYOMZPIEDRTKDAPRDDXVHW0ZHLSNHIC2MX1IMOO1J">Minimum Solder Mask Sliver (Gap=0mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDM5PZ3ODHYQKYHKWRMEIERIU5DDBDHTD2ARPJFM1GP3QPQP5HITB">Silk To Solder Mask (Clearance=0.05mm) (IsPad),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDMGQKVULTJ4MPOFSPBKMHDW2LFCJPMZANHSGUQIN0GIJYPARULJPC">Silk to Silk (Clearance=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDLYDIL0ONTL4TB52QM5OB4WUPTFQY2ALUVSY1TGHRW33LSZFXEEYN">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDZANIMK2W51COE0W1CRIIZWNVWEOTMAYSHOPDVMM2JDVPXS3IFH3O">Matched Lengths(Delay Tolerance=10ps) (All)</a></td>
+<td class="column2">61</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDSZ1PK1330WYQGJIJ2H50SK5GYE2EY3IZVYZYK5LLYWF3G25R2YZL">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">61</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Waived Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDW22OJGHEUCUQC2OX05NKAK3YNMSHPCYEJJBBYYM3TLJB0BOJJDDH">Matched Lengths(Delay Tolerance=10ps) (All)</a></td>
+<td class="column2">2</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">2</td>
+</tr>
+</table><br><a name="ID3WWJZ1G11QJWHDIN3JBWGMIOLHCJMOD44TQFC4CMYPGCDUNX1JMP"><h2>Rule Violations</h2></a><a name="IDZANIMK2W51COE0W1CRIIZWNVWEOTMAYSHOPDVMM2JDVPXS3IFH3O"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Matched Lengths(Delay Tolerance=10ps) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=900mil|Location2.X=4438.48mil|Location1.Y=120mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=900mil|Location2.X=4438.48mil|Location1.Y=120mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net +12 And Net I2C_SCL Delay:0ps is not within 10ps tolerance of Delay:382.426ps (372.426ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1643.094mil|Location2.X=4441.48mil|Location1.Y=492.158mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1643.094mil|Location2.X=4441.48mil|Location1.Y=492.158mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net 3V3 And Net I2C_SCL Delay:0ps is not within 10ps tolerance of Delay:382.426ps (372.426ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=510.622mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=510.622mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net AOUT And Net I2C_SCL Delay:258.063ps is not within 10ps tolerance of Delay:382.426ps (114.363ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=389mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=389mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net BST And Net I2C_SCL Delay:5.923ps is not within 10ps tolerance of Delay:382.426ps (366.503ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=1184.675mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=1184.675mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net DownBtn And Net I2C_SCL Delay:288.707ps is not within 10ps tolerance of Delay:382.426ps (83.719ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=392.981mil|Location2.X=5423.229mil|Location1.Y=0.02mil|Location2.Y=2915.827mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=392.981mil|Location2.X=5423.229mil|Location1.Y=0.02mil|Location2.Y=2915.827mil|Absolute=True">Matched Net Lengths: Between Net GND And Net I2C_SCL Delay:0ps is not within 10ps tolerance of Delay:382.426ps (372.426ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=1845.023mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=1845.023mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net I2C_SDA Delay:367.83ps is not within 10ps tolerance of Delay:382.426ps (4.596ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=509.638mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=509.638mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net LDR Delay:46.985ps is not within 10ps tolerance of Delay:382.426ps (325.441ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=524.158mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=524.158mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net LT8722_CS Delay:256.33ps is not within 10ps tolerance of Delay:382.426ps (116.096ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=465.158mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=465.158mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net MISO Delay:252.349ps is not within 10ps tolerance of Delay:382.426ps (120.077ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=484.158mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=484.158mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net MOSI Delay:256.193ps is not within 10ps tolerance of Delay:382.426ps (116.233ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=377.675mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=377.675mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetC17_1 Delay:13.717ps is not within 10ps tolerance of Delay:382.426ps (358.709ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=1205.882mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=1205.882mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetC2_1 Delay:59.355ps is not within 10ps tolerance of Delay:382.426ps (313.071ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1475.59mil|Location2.X=4438.48mil|Location1.Y=509.675mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1475.59mil|Location2.X=4438.48mil|Location1.Y=509.675mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetC21_1 Delay:0ps is not within 10ps tolerance of Delay:382.426ps (372.426ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1475.59mil|Location2.X=4438.48mil|Location1.Y=418.299mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1475.59mil|Location2.X=4438.48mil|Location1.Y=418.299mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetC21_2 Delay:0ps is not within 10ps tolerance of Delay:382.426ps (372.426ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1293.882mil|Location2.X=4438.48mil|Location1.Y=603.339mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1293.882mil|Location2.X=4438.48mil|Location1.Y=603.339mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetC22_1 Delay:86.526ps is not within 10ps tolerance of Delay:382.426ps (285.9ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=5411.685mil|Location1.Y=1845.023mil|Location2.Y=2878.955mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=5411.685mil|Location1.Y=1845.023mil|Location2.Y=2878.955mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetC23_2 Delay:117.699ps is not within 10ps tolerance of Delay:382.426ps (254.727ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=485.675mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=485.675mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetC25_1 Delay:0ps is not within 10ps tolerance of Delay:382.426ps (372.426ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=371.52mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=371.52mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetC25_2 Delay:0ps is not within 10ps tolerance of Delay:382.426ps (372.426ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=568.37mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=568.37mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetC26_1 Delay:39.128ps is not within 10ps tolerance of Delay:382.426ps (333.299ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=5409.685mil|Location1.Y=1645mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=5409.685mil|Location1.Y=1645mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetC27_2 Delay:121.759ps is not within 10ps tolerance of Delay:382.426ps (250.667ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=1268.874mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=1268.874mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetC3_1 Delay:53.191ps is not within 10ps tolerance of Delay:382.426ps (319.236ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=1845.023mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=1845.023mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetD1_A Delay:15.522ps is not within 10ps tolerance of Delay:382.426ps (356.904ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=639.094mil|Location2.X=4438.48mil|Location1.Y=1845.023mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=639.094mil|Location2.X=4438.48mil|Location1.Y=1845.023mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetD2_5 Delay:140.789ps is not within 10ps tolerance of Delay:382.426ps (231.637ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=719.669mil|Location2.X=4438.48mil|Location1.Y=1845.023mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=719.669mil|Location2.X=4438.48mil|Location1.Y=1845.023mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetJ1_A5 Delay:11.182ps is not within 10ps tolerance of Delay:382.426ps (361.244ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=615.517mil|Location2.X=4438.48mil|Location1.Y=1845.023mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=615.517mil|Location2.X=4438.48mil|Location1.Y=1845.023mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetJ1_B5 Delay:34.769ps is not within 10ps tolerance of Delay:382.426ps (337.657ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=5309.007mil|Location1.Y=1845.023mil|Location2.Y=2593.866mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=5309.007mil|Location1.Y=1845.023mil|Location2.Y=2593.866mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetJ11_3 Delay:20.654ps is not within 10ps tolerance of Delay:382.426ps (351.772ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=5283.417mil|Location1.Y=1845.023mil|Location2.Y=2593.866mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=5283.417mil|Location1.Y=1845.023mil|Location2.Y=2593.866mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetJ11_4 Delay:24.638ps is not within 10ps tolerance of Delay:382.426ps (347.788ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=5307.007mil|Location1.Y=1665.315mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=5307.007mil|Location1.Y=1665.315mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetJ14_3 Delay:20.511ps is not within 10ps tolerance of Delay:382.426ps (351.915ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=5281.417mil|Location1.Y=1665.315mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=5281.417mil|Location1.Y=1665.315mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetJ14_4 Delay:24.502ps is not within 10ps tolerance of Delay:382.426ps (347.924ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4458.48mil|Location1.Y=376.89mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4458.48mil|Location1.Y=376.89mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetJ3_1 Delay:0ps is not within 10ps tolerance of Delay:382.426ps (372.426ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4469mil|Location1.Y=503mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4469mil|Location1.Y=503mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetJ3_2 Delay:0ps is not within 10ps tolerance of Delay:382.426ps (372.426ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=1610.213mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=1610.213mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetR11_1 Delay:52.408ps is not within 10ps tolerance of Delay:382.426ps (320.018ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=980.291mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=980.291mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetR12_1 Delay:53.253ps is not within 10ps tolerance of Delay:382.426ps (319.173ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1349mil|Location2.X=4438.48mil|Location1.Y=551.055mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1349mil|Location2.X=4438.48mil|Location1.Y=551.055mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetR13_1 Delay:0ps is not within 10ps tolerance of Delay:382.426ps (372.426ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=5334.598mil|Location1.Y=1845.023mil|Location2.Y=2640.325mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=5334.598mil|Location1.Y=1845.023mil|Location2.Y=2640.325mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetR15_1 Delay:25.936ps is not within 10ps tolerance of Delay:382.426ps (346.49ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=527.055mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=527.055mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetR17_1 Delay:0ps is not within 10ps tolerance of Delay:382.426ps (372.426ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=5332.598mil|Location1.Y=1776.775mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=5332.598mil|Location1.Y=1776.775mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetR19_1 Delay:28.012ps is not within 10ps tolerance of Delay:382.426ps (344.414ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1961.464mil|Location2.X=4438.48mil|Location1.Y=1845.023mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1961.464mil|Location2.X=4438.48mil|Location1.Y=1845.023mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetR5_2 Delay:43.54ps is not within 10ps tolerance of Delay:382.426ps (328.886ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=435.045mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=435.045mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetR7_2 Delay:25.794ps is not within 10ps tolerance of Delay:382.426ps (346.632ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=341.045mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=341.045mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NetR8_2 Delay:31.438ps is not within 10ps tolerance of Delay:382.426ps (340.989ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1807.094mil|Location2.X=4438.48mil|Location1.Y=377.559mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1807.094mil|Location2.X=4438.48mil|Location1.Y=377.559mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net NRST Delay:367.706ps is not within 10ps tolerance of Delay:382.426ps (4.72ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1293.882mil|Location2.X=4438.48mil|Location1.Y=1546.094mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1293.882mil|Location2.X=4438.48mil|Location1.Y=1546.094mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net OLED_D04 Delay:80.84ps is not within 10ps tolerance of Delay:382.426ps (291.586ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1393.882mil|Location2.X=4438.48mil|Location1.Y=1572.882mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1393.882mil|Location2.X=4438.48mil|Location1.Y=1572.882mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net OLED_D05 Delay:61.17ps is not within 10ps tolerance of Delay:382.426ps (311.256ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1293.882mil|Location2.X=4438.48mil|Location1.Y=1672.882mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1293.882mil|Location2.X=4438.48mil|Location1.Y=1672.882mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net OLED_D06 Delay:71.89ps is not within 10ps tolerance of Delay:382.426ps (300.536ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1393.882mil|Location2.X=4438.48mil|Location1.Y=1672.882mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1393.882mil|Location2.X=4438.48mil|Location1.Y=1672.882mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net OLED_D07 Delay:56.469ps is not within 10ps tolerance of Delay:382.426ps (315.957ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1293.882mil|Location2.X=4438.48mil|Location1.Y=1251.094mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1293.882mil|Location2.X=4438.48mil|Location1.Y=1251.094mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net OLED_E Delay:116.213ps is not within 10ps tolerance of Delay:382.426ps (256.213ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1293.882mil|Location2.X=4438.48mil|Location1.Y=1153.094mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1293.882mil|Location2.X=4438.48mil|Location1.Y=1153.094mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net OLED_RS Delay:122.393ps is not within 10ps tolerance of Delay:382.426ps (250.033ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1393.882mil|Location2.X=4438.48mil|Location1.Y=1272.882mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1393.882mil|Location2.X=4438.48mil|Location1.Y=1272.882mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net OLED_RW Delay:95.575ps is not within 10ps tolerance of Delay:382.426ps (276.851ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=505.158mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=505.158mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net SCK Delay:280.665ps is not within 10ps tolerance of Delay:382.426ps (91.761ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=243.591mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=243.591mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net SFB Delay:28.646ps is not within 10ps tolerance of Delay:382.426ps (343.78ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=377.071mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=377.071mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net SW Delay:0ps is not within 10ps tolerance of Delay:382.426ps (372.426ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1607.094mil|Location2.X=4438.48mil|Location1.Y=1767.189mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1607.094mil|Location2.X=4438.48mil|Location1.Y=1767.189mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net SWCLK Delay:136.104ps is not within 10ps tolerance of Delay:382.426ps (236.322ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1707.094mil|Location2.X=4438.48mil|Location1.Y=1799.189mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1707.094mil|Location2.X=4438.48mil|Location1.Y=1799.189mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net SWDIO Delay:125.06ps is not within 10ps tolerance of Delay:382.426ps (247.366ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=548.024mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=548.024mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net SWEN Delay:262.961ps is not within 10ps tolerance of Delay:382.426ps (109.465ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=1659.675mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1981.149mil|Location2.X=4438.48mil|Location1.Y=1659.675mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net UpBtn Delay:264.174ps is not within 10ps tolerance of Delay:382.426ps (108.252ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=666.519mil|Location2.X=4438.48mil|Location1.Y=1845.023mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=666.519mil|Location2.X=4438.48mil|Location1.Y=1845.023mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net USB_IN_N Delay:45.622ps is not within 10ps tolerance of Delay:382.426ps (326.804ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=666.519mil|Location2.X=4438.48mil|Location1.Y=1845.023mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=666.519mil|Location2.X=4438.48mil|Location1.Y=1845.023mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net USB_IN_P Delay:46.092ps is not within 10ps tolerance of Delay:382.426ps (326.334ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1041.564mil|Location2.X=4438.48mil|Location1.Y=1845.023mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1041.564mil|Location2.X=4438.48mil|Location1.Y=1845.023mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net USB_MCU_N Delay:173.388ps is not within 10ps tolerance of Delay:382.426ps (199.038ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1026.757mil|Location2.X=4438.48mil|Location1.Y=1845.023mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1026.757mil|Location2.X=4438.48mil|Location1.Y=1845.023mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net USB_MCU_P Delay:173.547ps is not within 10ps tolerance of Delay:382.426ps (198.879ps smaller) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=856.675mil|Location2.X=4438.48mil|Location1.Y=1845.023mil|Location2.Y=2482.48mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=856.675mil|Location2.X=4438.48mil|Location1.Y=1845.023mil|Location2.Y=2482.48mil|Absolute=True">Matched Net Lengths: Between Net I2C_SCL And Net VBUS_SEN Delay:189.268ps is not within 10ps tolerance of Delay:382.426ps (183.158ps smaller) </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDLEEGYSBVF32DKKCIRQU5QD4MBO2EAUPXPHEQ50IO4HQBIDFJEXLC"><h2>Waived Violations</h2></a><a name="IDW22OJGHEUCUQC2OX05NKAK3YNMSHPCYEJJBBYYM3TLJB0BOJJDDH"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="waived">Matched Lengths(Delay Tolerance=10ps) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=666.519mil|Location2.X=1011.409mil|Location1.Y=2085.787mil|Location2.Y=2192.213mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=666.519mil|Location2.X=1011.409mil|Location1.Y=2085.787mil|Location2.Y=2192.213mil|Absolute=True">Matched Net Lengths: Differential Pair USB_IN Actual Delay Difference against diff pair USB_MCU is: 127.61ps, Delay Tolerance : 10ps.</acronym></a><br>Waived by Arvydas Kromelis at 2025-04-04 09:03:52</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1026.757mil|Location2.X=1922.22mil|Location1.Y=1845.023mil|Location2.Y=2192.213mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1026.757mil|Location2.X=1922.22mil|Location1.Y=1845.023mil|Location2.Y=2192.213mil|Absolute=True">Matched Net Lengths: Differential Pair USB_MCU Actual Delay Difference against diff pair USB_IN is: 127.61ps, Delay Tolerance : 10ps.</acronym></a><br>Waived by Arvydas Kromelis at 2025-04-04 09:03:52</td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>

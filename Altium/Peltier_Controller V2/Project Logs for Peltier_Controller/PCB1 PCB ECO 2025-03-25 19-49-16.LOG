@@ -1,0 +1,24 @@
+Change Component Footprint: Designator=J1 Old Footprint=FP-55932-0410-MFG New Footprint=PHOENIX_1725656
+Change Component Comment : Designator=J1 Old Comment=55932-0410 New Comment=1725656
+Change component parameters: Designator = "J1" ("J1"); Footprint = "FP-55932-0410-MFG"; UniqueID = "\ODRYDOCL" ("\ODRYDOCL")
+Change component parameters (AddParameter): Name = "Check_prices"; Value = "https://www.snapeda.com/parts/1725656/Phoenix+Contact/view-part/?ref=eda"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MF"; Value = "Phoenix Contact"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "1725656"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "None"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "SnapEDA_Link"; Value = "https://www.snapeda.com/parts/1725656/Phoenix+Contact/view-part/?ref=snap"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=J7(PHOENIX_1725656)
+Add component (AddParameter): Name = "Check_prices"; Value = "https://www.snapeda.com/parts/1725656/Phoenix+Contact/view-part/?ref=eda"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MF"; Value = "Phoenix Contact"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MP"; Value = "1725656"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "None"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "SnapEDA_Link"; Value = "https://www.snapeda.com/parts/1725656/Phoenix+Contact/view-part/?ref=snap"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Added Pin To Net: NetName=NetJ7_1 Pin=J7-1
+Added Pin To Net: NetName=NetJ7_1 Pin=U1-5
+Added Net: Name=NetJ7_1
+Added Pin To Net: NetName=NetJ7_2 Pin=J7-2
+Added Pin To Net: NetName=NetJ7_2 Pin=U1-6
+Added Net: Name=NetJ7_2
+Added Member To Class: ClassName=Sheet1 Member=Component J7 1725656
+Added Member To Class: ClassName=Sheet2 Member=Component J8 55932-0410

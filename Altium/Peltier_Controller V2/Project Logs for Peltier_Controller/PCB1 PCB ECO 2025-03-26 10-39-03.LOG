@@ -1,0 +1,10 @@
+Change Component Description : Designator=L4 Old Description=Ind6.8x6.8x3.8mm,18uH30%1.5A,shdSMD New Description=Ind6.8x6.8x3.8mm,18uH30%1.5A,shdSMD | Bourns SRR6038-180Y
+Change Component Description : Designator=J1 Old Description=PCB Terminal Screw 2.54mm 20AWG 160V 6A 2 Position COMBICON MPT Series New Description=PCB Terminal Screw 2.54mm 20AWG 160V 6A 2 Position COMBICON MPT Series | Phoenix Contact 1725656
+Change Component Description : Designator=J4 Old Description=PCB Terminal Screw 2.54mm 20AWG 160V 6A 2 Position COMBICON MPT Series New Description=PCB Terminal Screw 2.54mm 20AWG 160V 6A 2 Position COMBICON MPT Series | Phoenix Contact 1725656
+Change Component Description : Designator=J7 Old Description=PCB Terminal Screw 2.54mm 20AWG 160V 6A 2 Position COMBICON MPT Series New Description=PCB Terminal Screw 2.54mm 20AWG 160V 6A 2 Position COMBICON MPT Series | Phoenix Contact 1725656
+Added Component: Designator=J9(GND Border)
+Added Component: Designator=J13(GND Border)
+Add Pin To Net: Unknown Pin: Pin J9-0
+Add Pin To Net: Unknown Pin: Pin J13-0
+Added Member To Class: ClassName=Sheet2 Member=Component J9 GND Border
+Added Member To Class: ClassName=Sheet2 Member=Component J13 GND Border

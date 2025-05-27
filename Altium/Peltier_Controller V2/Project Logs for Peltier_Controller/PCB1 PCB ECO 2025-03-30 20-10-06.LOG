@@ -1,0 +1,67 @@
+Removed Pin From Net: NetName=3V3 Pin=U1-4
+Removed Pin From Net: NetName=3V3 Pin=U1-5
+Removed Pin From Net: NetName=3V3 Pin=U1-6
+Removed Pin From Net: NetName=GND Pin=U1-7
+Removed Pin From Net: NetName=NetC7_1 Pin=U1-10
+Removed Pin From Net: NetName=AOUT Pin=U1-11
+Removed Pin From Net: NetName=MISO Pin=U1-14
+Removed Pin From Net: NetName=MOSI Pin=U1-15
+Removed Pin From Net: NetName=SWEN Pin=U1-16
+Removed Pin From Net: NetName=LT8722_CS Pin=U1-17
+Removed Pin From Net: NetName=SCK Pin=U1-22
+Removed Pin From Net: NetName=DownBtn Pin=U1-23
+Removed Pin From Net: NetName=UpBtn Pin=U1-24
+Removed Pin From Net: NetName=I2C_SDA Pin=U1-26
+Removed Pin From Net: NetName=I2C_SCL Pin=U1-29
+Removed Pin From Net: NetName=VBUS_SEN Pin=U1-32
+Removed Pin From Net: NetName=USB_MCU_N Pin=U1-33
+Removed Pin From Net: NetName=USB_MCU_P Pin=U1-34
+Removed Pin From Net: NetName=SWDIO Pin=U1-35
+Removed Pin From Net: NetName=SWCLK Pin=U1-36
+Removed Pin From Net: NetName=OLED_D06 Pin=U1-38
+Removed Pin From Net: NetName=OLED_D07 Pin=U1-39
+Removed Pin From Net: NetName=OLED_D05 Pin=U1-40
+Removed Pin From Net: NetName=OLED_D04 Pin=U1-41
+Removed Pin From Net: NetName=OLED_E Pin=U1-43
+Removed Pin From Net: NetName=OLED_RS Pin=U1-44
+Removed Member From Class: ClassName=Sheet1 Member=U1
+Added Component: Designator=*(STM32G0B0CET6TR)
+Added Pin To Net: NetName=3V3 Pin=*-4
+Added Pin To Net: NetName=3V3 Pin=*-5
+Added Pin To Net: NetName=3V3 Pin=*-6
+Added Pin To Net: NetName=GND Pin=*-7
+Added Pin To Net: NetName=NetC7_1 Pin=*-10
+Added Pin To Net: NetName=AOUT Pin=*-11
+Added Pin To Net: NetName=MISO Pin=*-14
+Added Pin To Net: NetName=MOSI Pin=*-15
+Added Pin To Net: NetName=SWEN Pin=*-16
+Added Pin To Net: NetName=LT8722_CS Pin=*-17
+Added Pin To Net: NetName=SCK Pin=*-22
+Added Pin To Net: NetName=DownBtn Pin=*-23
+Added Pin To Net: NetName=UpBtn Pin=*-24
+Added Pin To Net: NetName=I2C_SDA Pin=*-26
+Added Pin To Net: NetName=I2C_SCL Pin=*-29
+Added Pin To Net: NetName=VBUS_SEN Pin=*-32
+Added Pin To Net: NetName=USB_MCU_N Pin=*-33
+Added Pin To Net: NetName=USB_MCU_P Pin=*-34
+Added Pin To Net: NetName=SWDIO Pin=*-35
+Added Pin To Net: NetName=SWCLK Pin=*-36
+Added Pin To Net: NetName=OLED_D06 Pin=*-38
+Added Pin To Net: NetName=OLED_D07 Pin=*-39
+Added Pin To Net: NetName=OLED_D05 Pin=*-40
+Added Pin To Net: NetName=OLED_D04 Pin=*-41
+Added Pin To Net: NetName=OLED_E Pin=*-43
+Added Pin To Net: NetName=OLED_RS Pin=*-44
+Change Net Name : Old Net Name=NetC7_1 New Net Name=Net*_10
+Added Pin To Net: NetName=Net*_8 Pin=*-8
+Added Pin To Net: NetName=Net*_8 Pin=C13-1
+Added Pin To Net: NetName=Net*_8 Pin=Y1-1
+Added Net: Name=Net*_8
+Added Pin To Net: NetName=Net*_9 Pin=*-9
+Added Pin To Net: NetName=Net*_9 Pin=C14-1
+Added Pin To Net: NetName=Net*_9 Pin=Y1-3
+Added Net: Name=Net*_9
+Added Pin To Net: NetName=Net*_47 Pin=*-47
+Added Pin To Net: NetName=Net*_47 Pin=R7-2
+Added Net: Name=Net*_47
+Added Member To Class: ClassName=Sheet1 Member=Component * STM32G0B0CET6TR

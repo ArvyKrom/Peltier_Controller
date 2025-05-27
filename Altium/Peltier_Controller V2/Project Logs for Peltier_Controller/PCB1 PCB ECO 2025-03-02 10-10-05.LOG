@@ -1,0 +1,27 @@
+Added Component: Designator=S1(FSM2J_1)
+Add component (AddParameter): Name = "Check_prices"; Value = "https://www.snapeda.com/parts/FSM2JSMAATR/TE+Connectivity+ALCOSWITCH+Switches/view-part/?ref=eda"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MF"; Value = "TE Connectivity"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MP"; Value = "FSM2JSMAATR"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "None"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "SnapEDA_Link"; Value = "https://www.snapeda.com/parts/FSM2JSMAATR/TE+Connectivity+ALCOSWITCH+Switches/view-part/?ref=snap"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Add Pin To Net: Unknown Pin: Pin C2-3
+Add Pin To Net: Unknown Pin: Pin C3-3
+Add Pin To Net: Unknown Pin: Pin C4-3
+Add Pin To Net: Unknown Pin: Pin C5-3
+Add Pin To Net: Unknown Pin: Pin C6-3
+Add Pin To Net: Unknown Pin: Pin C7-3
+Add Pin To Net: Unknown Pin: Pin C8-3
+Add Pin To Net: Unknown Pin: Pin C9-3
+Add Pin To Net: Unknown Pin: Pin C10-3
+Add Pin To Net: Unknown Pin: Pin C11-3
+Add Pin To Net: Unknown Pin: Pin C12-3
+Add Pin To Net: Unknown Pin: Pin C13-3
+Add Pin To Net: Unknown Pin: Pin C14-3
+Added Pin To Net: NetName=3V3 Pin=R1-1
+Added Pin To Net: NetName=GND Pin=S1-1
+Added Pin To Net: NetName=GND Pin=S1-2
+Added Pin To Net: NetName=NetC13_3 Pin=S1-3
+Added Pin To Net: NetName=NetC13_3 Pin=S1-4
+Add Net: Net with name "NetL1_1" already exists
+Added Member To Class: ClassName=Sheet1 Member=Component S1 FSM2JSMAATR

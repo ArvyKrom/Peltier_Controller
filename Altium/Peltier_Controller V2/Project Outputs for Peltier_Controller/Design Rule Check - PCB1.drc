@@ -1,0 +1,115 @@
+Protel Design System Design Rule Check
+PCB File : C:\Users\Public\Documents\Altium\Peltier_Controller\PCB1.PcbDoc
+Date     : 2025-04-04
+Time     : 09:04:27
+
+Processing Rule : Clearance Constraint (Gap=0.1mm) (All),(All)
+Rule Violations :0
+
+Processing Rule : Short-Circuit Constraint (Allowed=No) (All),(All)
+Rule Violations :0
+
+Processing Rule : Un-Routed Net Constraint ( (All) )
+Rule Violations :0
+
+Processing Rule : Modified Polygon (Allow modified: No), (Allow shelved: No)
+Rule Violations :0
+
+Processing Rule : Width Constraint (Min=0.1mm) (Max=2mm) (Preferred=0.2mm) (All)
+Rule Violations :0
+
+Processing Rule : Routing Topology Rule(Topology=Shortest) (All)
+Rule Violations :0
+
+Processing Rule : Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)
+Rule Violations :0
+
+Processing Rule : Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)
+Rule Violations :0
+
+Processing Rule : Hole To Hole Clearance (Gap=0.2mm) (All),(All)
+Rule Violations :0
+
+Processing Rule : Minimum Solder Mask Sliver (Gap=0mm) (All),(All)
+Rule Violations :0
+
+Processing Rule : Silk To Solder Mask (Clearance=0.05mm) (IsPad),(All)
+Rule Violations :0
+
+Processing Rule : Silk to Silk (Clearance=0.254mm) (All),(All)
+Rule Violations :0
+
+Processing Rule : Net Antennae (Tolerance=0mm) (All)
+Rule Violations :0
+
+Processing Rule : Matched Lengths(Delay Tolerance=10ps) (All)
+Rule Violations :0
+
+Processing Rule : Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)
+Rule Violations :0
+
+Waived Violations Of Rule : Matched Lengths(Delay Tolerance=10ps) (All)
+   Waived Violation between Matched Net Lengths: Differential Pair USB_IN Actual Delay Difference against diff pair USB_MCU is: 150.374ps, Delay Tolerance : 10ps.Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Differential Pair USB_MCU Actual Delay Difference against diff pair USB_IN is: 150.374ps, Delay Tolerance : 10ps.Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net +12 And Net NRST Delay:0ps is not within 10ps tolerance of Delay:384.572ps (374.572ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net 3V3 And Net NRST Delay:0ps is not within 10ps tolerance of Delay:384.572ps (374.572ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net AOUT And Net NRST Delay:272.613ps is not within 10ps tolerance of Delay:384.572ps (101.958ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net BST And Net NRST Delay:5.662ps is not within 10ps tolerance of Delay:384.572ps (368.91ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net DownBtn And Net NRST Delay:306.052ps is not within 10ps tolerance of Delay:384.572ps (68.519ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net GND And Net NRST Delay:0ps is not within 10ps tolerance of Delay:384.572ps (374.572ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net I2C_SDA And Net NRST Delay:361.906ps is not within 10ps tolerance of Delay:384.572ps (12.666ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net LDR And Net NRST Delay:73.011ps is not within 10ps tolerance of Delay:384.572ps (301.561ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net LT8722_CS And Net NRST Delay:263.885ps is not within 10ps tolerance of Delay:384.572ps (110.686ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net MISO And Net NRST Delay:262.702ps is not within 10ps tolerance of Delay:384.572ps (111.869ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net MOSI And Net NRST Delay:262.797ps is not within 10ps tolerance of Delay:384.572ps (111.774ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NetC17_1 And Net NRST Delay:6.928ps is not within 10ps tolerance of Delay:384.572ps (367.643ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NetC2_1 And Net NRST Delay:43.696ps is not within 10ps tolerance of Delay:384.572ps (330.876ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NetC21_1 And Net NRST Delay:18.139ps is not within 10ps tolerance of Delay:384.572ps (356.433ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NetC21_2 And Net NRST Delay:0ps is not within 10ps tolerance of Delay:384.572ps (374.572ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NetC22_2 And Net NRST Delay:189.449ps is not within 10ps tolerance of Delay:384.572ps (185.123ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NetC23_2 And Net NRST Delay:83.887ps is not within 10ps tolerance of Delay:384.572ps (290.684ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NetC25_1 And Net NRST Delay:18.14ps is not within 10ps tolerance of Delay:384.572ps (356.431ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NetC25_2 And Net NRST Delay:0ps is not within 10ps tolerance of Delay:384.572ps (374.572ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NetC26_2 And Net NRST Delay:47.695ps is not within 10ps tolerance of Delay:384.572ps (326.876ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NetC3_1 And Net NRST Delay:39.443ps is not within 10ps tolerance of Delay:384.572ps (335.129ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NetD1_A And Net NRST Delay:22.733ps is not within 10ps tolerance of Delay:384.572ps (351.839ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NetD2_5 And Net NRST Delay:123.235ps is not within 10ps tolerance of Delay:384.572ps (251.337ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NetJ1_A5 And Net NRST Delay:7.847ps is not within 10ps tolerance of Delay:384.572ps (366.725ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NetJ1_B5 And Net NRST Delay:34.296ps is not within 10ps tolerance of Delay:384.572ps (340.275ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NetJ11_3 And Net NRST Delay:15.827ps is not within 10ps tolerance of Delay:384.572ps (358.744ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NetJ11_4 And Net NRST Delay:15.631ps is not within 10ps tolerance of Delay:384.572ps (358.941ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NetJ3_1 And Net NRST Delay:0ps is not within 10ps tolerance of Delay:384.572ps (374.572ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NetJ3_2 And Net NRST Delay:0ps is not within 10ps tolerance of Delay:384.572ps (374.572ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NetR11_1 And Net NRST Delay:47.963ps is not within 10ps tolerance of Delay:384.572ps (326.609ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NetR12_1 And Net NRST Delay:47.696ps is not within 10ps tolerance of Delay:384.572ps (326.876ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NetR13_2 And Net NRST Delay:43.223ps is not within 10ps tolerance of Delay:384.572ps (331.348ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NetR15_2 And Net NRST Delay:38.144ps is not within 10ps tolerance of Delay:384.572ps (336.427ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NetR17_2 And Net NRST Delay:41.027ps is not within 10ps tolerance of Delay:384.572ps (333.544ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NetR5_2 And Net NRST Delay:14.465ps is not within 10ps tolerance of Delay:384.572ps (360.106ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NetR7_2 And Net NRST Delay:16.342ps is not within 10ps tolerance of Delay:384.572ps (358.23ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NetR8_2 And Net NRST Delay:9.775ps is not within 10ps tolerance of Delay:384.572ps (364.797ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NRST And Net OLED_D04 Delay:79.125ps is not within 10ps tolerance of Delay:384.572ps (295.447ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NRST And Net OLED_D05 Delay:60.404ps is not within 10ps tolerance of Delay:384.572ps (314.168ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NRST And Net OLED_D06 Delay:70.989ps is not within 10ps tolerance of Delay:384.572ps (303.582ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NRST And Net OLED_D07 Delay:56.879ps is not within 10ps tolerance of Delay:384.572ps (317.693ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NRST And Net OLED_E Delay:115.52ps is not within 10ps tolerance of Delay:384.572ps (259.051ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NRST And Net OLED_RS Delay:120.885ps is not within 10ps tolerance of Delay:384.572ps (253.686ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NRST And Net OLED_RW Delay:88.333ps is not within 10ps tolerance of Delay:384.572ps (286.239ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NRST And Net SCK Delay:286.957ps is not within 10ps tolerance of Delay:384.572ps (87.615ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NRST And Net SFB Delay:89.512ps is not within 10ps tolerance of Delay:384.572ps (285.059ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NRST And Net SW Delay:0ps is not within 10ps tolerance of Delay:384.572ps (374.572ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NRST And Net SWCLK Delay:162.478ps is not within 10ps tolerance of Delay:384.572ps (212.093ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NRST And Net SWDIO Delay:110.561ps is not within 10ps tolerance of Delay:384.572ps (264.01ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NRST And Net SWEN Delay:282.342ps is not within 10ps tolerance of Delay:384.572ps (92.229ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NRST And Net UpBtn Delay:278.101ps is not within 10ps tolerance of Delay:384.572ps (96.47ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NRST And Net USB_IN_N Delay:36.141ps is not within 10ps tolerance of Delay:384.572ps (338.431ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NRST And Net USB_IN_P Delay:36.259ps is not within 10ps tolerance of Delay:384.572ps (338.313ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NRST And Net USB_MCU_N Delay:183.921ps is not within 10ps tolerance of Delay:384.572ps (190.651ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NRST And Net USB_MCU_P Delay:189.226ps is not within 10ps tolerance of Delay:384.572ps (185.346ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Between Net NRST And Net VBUS_SEN Delay:198.15ps is not within 10ps tolerance of Delay:384.572ps (176.422ps smaller) Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+Waived Violations :58
+
+
+Violations Detected : 0
+Waived Violations : 58
+Time Elapsed        : 00:00:00

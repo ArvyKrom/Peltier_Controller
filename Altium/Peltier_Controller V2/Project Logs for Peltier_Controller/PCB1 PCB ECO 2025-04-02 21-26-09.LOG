@@ -1,0 +1,10 @@
+Removed Pin From Net: NetName=+12 Pin=C11-1
+Removed Pin From Net: NetName=GND Pin=C11-2
+Change Component Description : Designator=L3 Old Description=Ind6.8x6.8x3.8mm,18uH30%1.5A,shdSMD New Description=Ind6.8x6.8x3.8mm,18uH30%1.5A,shdSMD | Bourns SRR6038-180Y
+Change Component Description : Designator=J3 Old Description=PCB Terminal Screw 2.54mm 20AWG 160V 6A 2 Position COMBICON MPT Series New Description=PCB Terminal Screw 2.54mm 20AWG 160V 6A 2 Position COMBICON MPT Series | Phoenix Contact 1725656
+Change Component Description : Designator=J4 Old Description=PCB Terminal Screw 2.54mm 20AWG 160V 6A 2 Position COMBICON MPT Series New Description=PCB Terminal Screw 2.54mm 20AWG 160V 6A 2 Position COMBICON MPT Series | Phoenix Contact 1725656
+Change Component Description : Designator=J6 Old Description=PCB Terminal Screw 2.54mm 20AWG 160V 6A 2 Position COMBICON MPT Series New Description=PCB Terminal Screw 2.54mm 20AWG 160V 6A 2 Position COMBICON MPT Series | Phoenix Contact 1725656
+Added Pin To Net: NetName=GND Pin=C11-1
+Added Pin To Net: NetName=+12 Pin=C11-2
+Added Member To Class: ClassName=Sheet2 Member=Component J12 GND Border
+Added Member To Class: ClassName=Sheet2 Member=Component J13 GND Border

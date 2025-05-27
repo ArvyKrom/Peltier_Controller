@@ -1,0 +1,82 @@
+Added Component: Designator=D1(USB ESD protection)
+Add component (AddParameter): Name = "Check_prices"; Value = "https://www.snapeda.com/parts/USBLC6-2SC6Y/STMicroelectronics/view-part/?ref=eda"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MF"; Value = "STMicroelectronics"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MP"; Value = "USBLC6-2SC6Y"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "SOT-23-6 STMicroelectronics"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "SnapEDA_Link"; Value = "https://www.snapeda.com/parts/USBLC6-2SC6Y/STMicroelectronics/view-part/?ref=snap"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=J3(USB TypeC)
+Add component (AddParameter): Name = "Check_prices"; Value = "https://www.snapeda.com/parts/SS-52400-004/Bel+Circuit+Protection/view-part/?ref=eda"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MF"; Value = "Bel Fuse"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MP"; Value = "SS-52400-004"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "None"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "SnapEDA_Link"; Value = "https://www.snapeda.com/parts/SS-52400-004/Bel+Circuit+Protection/view-part/?ref=snap"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=R5(0603)
+Added Component: Designator=R6(0603)
+Added Component: Designator=R7(0603)
+Added Component: Designator=R8(0603)
+Added Component: Designator=U4(QFN40P800X800X100-69N)
+Add component (AddParameter): Name = "Availability"; Value = "In Stock"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Check_prices"; Value = "https://www.snapeda.com/parts/STM32WB55RGV7/STMicroelectronics/view-part/?ref=eda"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MF"; Value = "STMicroelectronics"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MP"; Value = "STM32WB55RGV7"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "VFQFN-68 STMicroelectronics"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Price"; Value = "None"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Purchase-URL"; Value = "https://pricing.snapeda.com/search?q=STM32WB55RGV7&ref=eda"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "SnapEDA_Link"; Value = "https://www.snapeda.com/parts/STM32WB55RGV7/STMicroelectronics/view-part/?ref=snap"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=D1-2
+Added Pin To Net: NetName=GND Pin=J3-A1
+Added Pin To Net: NetName=GND Pin=J3-A12
+Added Pin To Net: NetName=GND Pin=J3-B1
+Added Pin To Net: NetName=GND Pin=J3-B12
+Added Pin To Net: NetName=GND Pin=J3-SH1
+Added Pin To Net: NetName=GND Pin=J3-SH2
+Added Pin To Net: NetName=GND Pin=J3-SH3
+Added Pin To Net: NetName=GND Pin=J3-SH4
+Added Pin To Net: NetName=NetC7_1 Pin=R1-1
+Added Pin To Net: NetName=3V3 Pin=R2-1
+Added Pin To Net: NetName=NetC20_2 Pin=R3-1
+Added Pin To Net: NetName=GND Pin=R4-1
+Added Pin To Net: NetName=GND Pin=R6-1
+Added Pin To Net: NetName=GND Pin=R7-1
+Added Pin To Net: NetName=GND Pin=R8-1
+Added Pin To Net: NetName=D+ Pin=D1-3
+Added Pin To Net: NetName=D+ Pin=J3-A6
+Added Pin To Net: NetName=D+ Pin=J3-B6
+Added Net: Name=D+
+Added Pin To Net: NetName=D- Pin=D1-1
+Added Pin To Net: NetName=D- Pin=J3-A7
+Added Pin To Net: NetName=D- Pin=J3-B7
+Added Net: Name=D-
+Added Pin To Net: NetName=NetD1_4 Pin=D1-4
+Added Pin To Net: NetName=NetD1_4 Pin=U4-53
+Added Net: Name=NetD1_4
+Added Pin To Net: NetName=NetD1_6 Pin=D1-6
+Added Pin To Net: NetName=NetD1_6 Pin=U4-52
+Added Net: Name=NetD1_6
+Added Pin To Net: NetName=NetJ3_A5 Pin=J3-A5
+Added Pin To Net: NetName=NetJ3_A5 Pin=R6-1
+Added Net: Name=NetJ3_A5
+Added Pin To Net: NetName=NetJ3_B5 Pin=J3-B5
+Added Pin To Net: NetName=NetJ3_B5 Pin=R8-1
+Added Net: Name=NetJ3_B5
+Added Pin To Net: NetName=VBUS_SEN Pin=R5-1
+Added Pin To Net: NetName=VBUS_SEN Pin=R7-1
+Added Pin To Net: NetName=VBUS_SEN Pin=U4-54
+Added Net: Name=VBUS_SEN
+Added Pin To Net: NetName=VBUS Pin=D1-5
+Added Pin To Net: NetName=VBUS Pin=J3-A4
+Added Pin To Net: NetName=VBUS Pin=J3-A9
+Added Pin To Net: NetName=VBUS Pin=J3-B4
+Added Pin To Net: NetName=VBUS Pin=J3-B9
+Added Pin To Net: NetName=VBUS Pin=R5-1
+Added Net: Name=VBUS
+Added Member To Class: ClassName=Sheet1 Member=Component D1 USBLC6-2SC6Y
+Added Member To Class: ClassName=Sheet1 Member=Component J3 SS-52400-004
+Added Member To Class: ClassName=Sheet1 Member=Component R5 20kO
+Added Member To Class: ClassName=Sheet1 Member=Component R6 5.1kO
+Added Member To Class: ClassName=Sheet1 Member=Component R7 30kO
+Added Member To Class: ClassName=Sheet1 Member=Component R8 5.1kO
+Added Member To Class: ClassName=Sheet1 Member=Component U4 STM32WB55RGV7

@@ -1,0 +1,6 @@
+Change Component Footprint: Designator=L2 Old Footprint=10uH 0805 New Footprint=10uH 1206
+Change Component Footprint: Designator=L1 Old Footprint=10uH 0805 New Footprint=0603
+Change Component Comment : Designator=L1 Old Comment=10uH New Comment=10nH
+Added Pin To Net: NetName=NetC15_1 Pin=L2-2
+Added Pin To Net: NetName=NetC7_1 Pin=R1-1
+Add Net: Net with name "NetL1_1" already exists

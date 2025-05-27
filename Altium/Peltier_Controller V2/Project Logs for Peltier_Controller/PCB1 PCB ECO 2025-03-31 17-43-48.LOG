@@ -1,0 +1,6 @@
+Added Component: Designator=J12(GND Border)
+Added Component: Designator=J13(GND Border)
+Added Pin To Net: NetName=GND Pin=J12-0
+Added Pin To Net: NetName=GND Pin=J13-0
+Added Member To Class: ClassName=Sheet2 Member=Component J12 GND Border
+Added Member To Class: ClassName=Sheet2 Member=Component J13 GND Border

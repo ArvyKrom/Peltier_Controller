@@ -1,0 +1,8 @@
+Change Component Comment : Designator=L7 Old Comment=SPDL485025-250-2P-T New Comment=SPDL485025-250
+Change Component Description : Designator=L4 Old Description=Ind6.8x6.8x3.8mm,18uH30%1.5A,shdSMD New Description=Ind6.8x6.8x3.8mm,18uH30%1.5A,shdSMD | Bourns SRR6038-180Y
+Change Component Description : Designator=J1 Old Description=PCB Terminal Screw 2.54mm 20AWG 160V 6A 2 Position COMBICON MPT Series New Description=PCB Terminal Screw 2.54mm 20AWG 160V 6A 2 Position COMBICON MPT Series | Phoenix Contact 1725656
+Change Component Description : Designator=J4 Old Description=PCB Terminal Screw 2.54mm 20AWG 160V 6A 2 Position COMBICON MPT Series New Description=PCB Terminal Screw 2.54mm 20AWG 160V 6A 2 Position COMBICON MPT Series | Phoenix Contact 1725656
+Change Component Description : Designator=J7 Old Description=PCB Terminal Screw 2.54mm 20AWG 160V 6A 2 Position COMBICON MPT Series New Description=PCB Terminal Screw 2.54mm 20AWG 160V 6A 2 Position COMBICON MPT Series | Phoenix Contact 1725656
+Change Net Name : Old Net Name=NetC24_1 New Net Name=BST
+Change Net Name : Old Net Name=NetC24_2 New Net Name=SW
+Change Net Name : Old Net Name=NetC27_1 New Net Name=SFB

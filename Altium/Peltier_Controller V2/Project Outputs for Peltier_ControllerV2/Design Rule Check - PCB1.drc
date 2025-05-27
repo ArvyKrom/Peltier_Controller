@@ -1,0 +1,120 @@
+Protel Design System Design Rule Check
+PCB File : C:\Users\Public\Documents\Altium\Peltier_Controller V2\PCB1.PcbDoc
+Date     : 2025-04-24
+Time     : 00:33:05
+
+Processing Rule : Clearance Constraint (Gap=0.1mm) (All),(All)
+Rule Violations :0
+
+Processing Rule : Short-Circuit Constraint (Allowed=No) (All),(All)
+Rule Violations :0
+
+Processing Rule : Un-Routed Net Constraint ( (All) )
+Rule Violations :0
+
+Processing Rule : Modified Polygon (Allow modified: No), (Allow shelved: No)
+Rule Violations :0
+
+Processing Rule : Width Constraint (Min=0.1mm) (Max=2mm) (Preferred=0.3mm) (All)
+Rule Violations :0
+
+Processing Rule : Routing Topology Rule(Topology=Shortest) (All)
+Rule Violations :0
+
+Processing Rule : Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)
+Rule Violations :0
+
+Processing Rule : Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)
+Rule Violations :0
+
+Processing Rule : Hole To Hole Clearance (Gap=0.2mm) (All),(All)
+Rule Violations :0
+
+Processing Rule : Minimum Solder Mask Sliver (Gap=0mm) (All),(All)
+Rule Violations :0
+
+Processing Rule : Silk To Solder Mask (Clearance=0.05mm) (IsPad),(All)
+Rule Violations :0
+
+Processing Rule : Silk to Silk (Clearance=0.254mm) (All),(All)
+Rule Violations :0
+
+Processing Rule : Net Antennae (Tolerance=0mm) (All)
+Rule Violations :0
+
+Processing Rule : Matched Lengths(Delay Tolerance=10ps) (All)
+   Violation between Matched Net Lengths: Between Net +12 And Net I2C_SCL Delay:0ps is not within 10ps tolerance of Delay:382.426ps (372.426ps smaller) 
+   Violation between Matched Net Lengths: Between Net 3V3 And Net I2C_SCL Delay:0ps is not within 10ps tolerance of Delay:382.426ps (372.426ps smaller) 
+   Violation between Matched Net Lengths: Between Net AOUT And Net I2C_SCL Delay:258.063ps is not within 10ps tolerance of Delay:382.426ps (114.363ps smaller) 
+   Violation between Matched Net Lengths: Between Net BST And Net I2C_SCL Delay:5.923ps is not within 10ps tolerance of Delay:382.426ps (366.503ps smaller) 
+   Violation between Matched Net Lengths: Between Net DownBtn And Net I2C_SCL Delay:288.707ps is not within 10ps tolerance of Delay:382.426ps (83.719ps smaller) 
+   Violation between Matched Net Lengths: Between Net GND And Net I2C_SCL Delay:0ps is not within 10ps tolerance of Delay:382.426ps (372.426ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net I2C_SDA Delay:367.83ps is not within 10ps tolerance of Delay:382.426ps (4.596ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net LDR Delay:46.985ps is not within 10ps tolerance of Delay:382.426ps (325.441ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net LT8722_CS Delay:256.33ps is not within 10ps tolerance of Delay:382.426ps (116.096ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net MISO Delay:252.349ps is not within 10ps tolerance of Delay:382.426ps (120.077ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net MOSI Delay:256.193ps is not within 10ps tolerance of Delay:382.426ps (116.233ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetC17_1 Delay:13.717ps is not within 10ps tolerance of Delay:382.426ps (358.709ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetC2_1 Delay:59.355ps is not within 10ps tolerance of Delay:382.426ps (313.071ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetC21_1 Delay:0ps is not within 10ps tolerance of Delay:382.426ps (372.426ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetC21_2 Delay:0ps is not within 10ps tolerance of Delay:382.426ps (372.426ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetC22_1 Delay:86.526ps is not within 10ps tolerance of Delay:382.426ps (285.9ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetC23_2 Delay:117.699ps is not within 10ps tolerance of Delay:382.426ps (254.727ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetC25_1 Delay:0ps is not within 10ps tolerance of Delay:382.426ps (372.426ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetC25_2 Delay:0ps is not within 10ps tolerance of Delay:382.426ps (372.426ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetC26_1 Delay:39.128ps is not within 10ps tolerance of Delay:382.426ps (333.299ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetC27_2 Delay:121.759ps is not within 10ps tolerance of Delay:382.426ps (250.667ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetC3_1 Delay:53.191ps is not within 10ps tolerance of Delay:382.426ps (319.236ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetD1_A Delay:15.522ps is not within 10ps tolerance of Delay:382.426ps (356.904ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetD2_5 Delay:140.789ps is not within 10ps tolerance of Delay:382.426ps (231.637ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetJ1_A5 Delay:11.182ps is not within 10ps tolerance of Delay:382.426ps (361.244ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetJ1_B5 Delay:34.769ps is not within 10ps tolerance of Delay:382.426ps (337.657ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetJ11_3 Delay:20.654ps is not within 10ps tolerance of Delay:382.426ps (351.772ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetJ11_4 Delay:24.638ps is not within 10ps tolerance of Delay:382.426ps (347.788ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetJ14_3 Delay:20.511ps is not within 10ps tolerance of Delay:382.426ps (351.915ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetJ14_4 Delay:24.502ps is not within 10ps tolerance of Delay:382.426ps (347.924ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetJ3_1 Delay:0ps is not within 10ps tolerance of Delay:382.426ps (372.426ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetJ3_2 Delay:0ps is not within 10ps tolerance of Delay:382.426ps (372.426ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetR11_1 Delay:52.408ps is not within 10ps tolerance of Delay:382.426ps (320.018ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetR12_1 Delay:53.253ps is not within 10ps tolerance of Delay:382.426ps (319.173ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetR13_1 Delay:0ps is not within 10ps tolerance of Delay:382.426ps (372.426ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetR15_1 Delay:25.936ps is not within 10ps tolerance of Delay:382.426ps (346.49ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetR17_1 Delay:0ps is not within 10ps tolerance of Delay:382.426ps (372.426ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetR19_1 Delay:28.012ps is not within 10ps tolerance of Delay:382.426ps (344.414ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetR5_2 Delay:43.54ps is not within 10ps tolerance of Delay:382.426ps (328.886ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetR7_2 Delay:25.794ps is not within 10ps tolerance of Delay:382.426ps (346.632ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NetR8_2 Delay:31.438ps is not within 10ps tolerance of Delay:382.426ps (340.989ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net NRST Delay:367.706ps is not within 10ps tolerance of Delay:382.426ps (4.72ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net OLED_D04 Delay:80.84ps is not within 10ps tolerance of Delay:382.426ps (291.586ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net OLED_D05 Delay:61.17ps is not within 10ps tolerance of Delay:382.426ps (311.256ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net OLED_D06 Delay:71.89ps is not within 10ps tolerance of Delay:382.426ps (300.536ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net OLED_D07 Delay:56.469ps is not within 10ps tolerance of Delay:382.426ps (315.957ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net OLED_E Delay:116.213ps is not within 10ps tolerance of Delay:382.426ps (256.213ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net OLED_RS Delay:122.393ps is not within 10ps tolerance of Delay:382.426ps (250.033ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net OLED_RW Delay:95.575ps is not within 10ps tolerance of Delay:382.426ps (276.851ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net SCK Delay:280.665ps is not within 10ps tolerance of Delay:382.426ps (91.761ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net SFB Delay:28.646ps is not within 10ps tolerance of Delay:382.426ps (343.78ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net SW Delay:0ps is not within 10ps tolerance of Delay:382.426ps (372.426ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net SWCLK Delay:136.104ps is not within 10ps tolerance of Delay:382.426ps (236.322ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net SWDIO Delay:125.06ps is not within 10ps tolerance of Delay:382.426ps (247.366ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net SWEN Delay:262.961ps is not within 10ps tolerance of Delay:382.426ps (109.465ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net UpBtn Delay:264.174ps is not within 10ps tolerance of Delay:382.426ps (108.252ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net USB_IN_N Delay:45.622ps is not within 10ps tolerance of Delay:382.426ps (326.804ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net USB_IN_P Delay:46.092ps is not within 10ps tolerance of Delay:382.426ps (326.334ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net USB_MCU_N Delay:173.388ps is not within 10ps tolerance of Delay:382.426ps (199.038ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net USB_MCU_P Delay:173.547ps is not within 10ps tolerance of Delay:382.426ps (198.879ps smaller) 
+   Violation between Matched Net Lengths: Between Net I2C_SCL And Net VBUS_SEN Delay:189.268ps is not within 10ps tolerance of Delay:382.426ps (183.158ps smaller) 
+Rule Violations :61
+
+Processing Rule : Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)
+Rule Violations :0
+
+Waived Violations Of Rule : Matched Lengths(Delay Tolerance=10ps) (All)
+   Waived Violation between Matched Net Lengths: Differential Pair USB_IN Actual Delay Difference against diff pair USB_MCU is: 127.61ps, Delay Tolerance : 10ps.Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+   Waived Violation between Matched Net Lengths: Differential Pair USB_MCU Actual Delay Difference against diff pair USB_IN is: 127.61ps, Delay Tolerance : 10ps.Waived by Arvydas Kromelis at 2025-04-04 09:03:52
+Waived Violations :2
+
+
+Violations Detected : 61
+Waived Violations : 2
+Time Elapsed        : 00:00:01
