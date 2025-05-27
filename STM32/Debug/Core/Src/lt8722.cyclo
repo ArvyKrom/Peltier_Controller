@@ -1,6 +1,0 @@
-../Core/Src/lt8722.c:5:5:LT8722_Init	7
-../Core/Src/lt8722.c:69:5:read_lt8722_reg	2
-../Core/Src/lt8722.c:82:5:set_vout	5
-../Core/Src/lt8722.c:126:5:write_lt8722_reg	4
-../Core/Src/lt8722.c:149:5:status_aq	2
-../Core/Src/lt8722.c:162:9:get_CRC8	4
