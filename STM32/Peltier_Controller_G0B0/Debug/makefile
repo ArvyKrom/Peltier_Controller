@@ -64,8 +64,8 @@ all: main-build
 main-build: Peltier_Controller_G0B0.elf secondary-outputs
 
 # Tool invocations
-Peltier_Controller_G0B0.elf Peltier_Controller_G0B0.map: $(OBJS) $(USER_OBJS) C:\Users\arvyd\Desktop\Bakalauras\GIT\ Version\Peltier_Controller\STM32\Peltier_Controller_G0B0\STM32G0B0CETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Peltier_Controller_G0B0.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0plus -T"C:\Users\arvyd\Desktop\Bakalauras\GIT Version\Peltier_Controller\STM32\Peltier_Controller_G0B0\STM32G0B0CETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Peltier_Controller_G0B0.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Peltier_Controller_G0B0.elf Peltier_Controller_G0B0.map: $(OBJS) $(USER_OBJS) C:\Users\arvyd\Desktop\Bakalauras\GIT\Peltier_Controller\STM32\Peltier_Controller_G0B0\STM32G0B0CETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Peltier_Controller_G0B0.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m0plus -T"C:\Users\arvyd\Desktop\Bakalauras\GIT\Peltier_Controller\STM32\Peltier_Controller_G0B0\STM32G0B0CETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Peltier_Controller_G0B0.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

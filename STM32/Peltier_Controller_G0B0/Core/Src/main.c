@@ -65,6 +65,14 @@ int temp_down_btn_is_pressed_down = 0;
 int temp_up_btn_is_pressed_down = 0;
 double set_temp_inside = 0;
 
+double current_temp_inside = 0;
+double current_temp_outside = 0;
+double pid_output = 0;
+
+double Kp_Part = 0;
+double Ki_Part = 0;
+double Kd_Part = 0;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -151,13 +159,13 @@ int main(void)
 	  HAL_Delay(500);
   }
 
-  while(is_load_connected(&hspi2, &hadc1)!=1){
-	  Oled_cursor(&oled, 0, 0);
-	  Oled_string(&oled, "Missing");
-	  Oled_cursor(&oled, 1, 0);
-	  Oled_string(&oled, "Peltier");
-	  HAL_Delay(500);
-  }
+//  while(is_load_connected(&hspi2, &hadc1)!=1){
+//	  Oled_cursor(&oled, 0, 0);
+//	  Oled_string(&oled, "Missing");
+//	  Oled_cursor(&oled, 1, 0);
+//	  Oled_string(&oled, "Peltier");
+//	  HAL_Delay(500);
+//  }
 
   while(read_temp(&hi2c2, TMP1075_2_addr, &current_temp_inside) != 0){}
   set_temp_inside = current_temp_inside;
@@ -178,7 +186,7 @@ int main(void)
 	if(time_to_rerun_PID_loop){
 		read_temp(&hi2c2, TMP1075_2_addr, &current_temp_inside);
 		read_temp(&hi2c2, TMP1075_1_addr, &current_temp_outside);
-		pid_output = compute_pid_output(set_temp_inside - current_temp_inside);
+		pid_output = compute_pid_output(current_temp_inside, set_temp_inside, current_temp_outside, &Kp_Part, &Ki_Part, &Kd_Part);
 		set_vout(&hspi2, pid_output);
 
 		send_temps_via_usb(current_temp_inside, current_temp_outside);
