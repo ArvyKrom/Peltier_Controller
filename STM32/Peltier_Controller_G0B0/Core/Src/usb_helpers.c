@@ -4,10 +4,10 @@
 #include "usbd_cdc_if.h"
 
 
-void send_temps_via_usb(double current_temp_inside, double current_temp_outside){
-	uint8_t usb_tx_data[20] = {0};
-	put_temps_into_char_array(current_temp_inside, current_temp_outside, usb_tx_data, 20);
-	CDC_Transmit_FS(usb_tx_data, 20);
+void send_temps_via_usb(double current_temp_inside, double current_temp_outside, double set_temp_inside){
+	uint8_t usb_tx_data[25] = {0};
+	put_temps_into_char_array(current_temp_inside, current_temp_outside, set_temp_inside, usb_tx_data, 25);
+	CDC_Transmit_FS(usb_tx_data, 25);
 }
 
 void listen_for_temp_change_sent_via_usb(double *set_temp_inside){
@@ -32,8 +32,8 @@ int string_to_double(uint8_t *data, uint8_t size, double *result){
 	return 0;
 
 }
-int put_temps_into_char_array(double temp1, double temp2, uint8_t *char_array, uint8_t size){
+int put_temps_into_char_array(double temp1, double temp2, double temp3, uint8_t *char_array, uint8_t size){
 	memset(char_array,0, size);
-	snprintf((char*)char_array, size, "%.1lf, %.1lf\n", temp1, temp2);
+	snprintf((char*)char_array, size, "%.1lf, %.1lf, %.1lf\n\r", temp1, temp2, temp3);
 	return 0;
 }

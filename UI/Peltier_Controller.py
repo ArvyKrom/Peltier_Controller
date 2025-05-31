@@ -682,21 +682,21 @@ class SerialMonitorApp:
             try:
                 if self.serial_port.in_waiting:
                     line = self.serial_port.readline().decode("utf-8", errors="replace").strip()
-                    match = re.search(r"(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)", line)
-                    if match:
-                        inside_temp = float(match.group(1))
-                        self.temp_queue.put(inside_temp)
-                        self.current_temp = inside_temp
-                        outside_temp = match.group(2)
-                        set_inside_temp = match.group(3)
-                        timestamp = datetime.datetime.now().strftime("[%H:%M:%S] ")
-                        display_line = f"{timestamp}Inside {inside_temp} °C, Outside {outside_temp} °C, Set {set_inside_temp} °C\n"
-                        record_line = f"{timestamp}{inside_temp}, {outside_temp}, {set_inside_temp}\n"
-                        self.display_output(display_line, record_line)
-                    else:
-                        timestamp = datetime.datetime.now().strftime("[%H:%M:%S] ")
-                        display_line = f"{timestamp}{line}\n"
-                        self.display_output(display_line)
+                    if line:  # Check if line is not empty
+                        match = re.search(r"(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)", line)
+                        if match:
+                            inside_temp = float(match.group(1))
+                            self.temp_queue.put(inside_temp)
+                            self.current_temp = inside_temp
+                            outside_temp = match.group(2)
+                            set_inside_temp = match.group(3)
+                            timestamp = datetime.datetime.now().strftime("[%H:%M:%S] ")
+                            display_line = f"{timestamp}Inside {inside_temp} °C, Outside {outside_temp} °C, Set {set_inside_temp} °C\n"
+                            record_line = f"{timestamp}{inside_temp}, {outside_temp}, {set_inside_temp}\n"
+                            self.display_output(display_line, record_line)
+                else:
+                    # Small sleep to prevent CPU overuse when no data is available
+                    time.sleep(0.01)
             except (serial.SerialException, IOError) as e:
                 self.display_output(f"{datetime.datetime.now().strftime('[%H:%M:%S] ')}Error: Device disconnected ({str(e)})\n")
                 self.root.after(0, self.disconnect_serial)

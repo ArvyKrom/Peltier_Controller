@@ -1,42 +1,21 @@
-14:33:00 **** Incremental Build of configuration Debug for project Peltier_Controller_G0B0 ****
+07:53:12 **** Incremental Build of configuration Debug for project Peltier_Controller_G0B0 ****
 make -j16 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0plus -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G0B0xx -c -I../Core/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G0xx/Include -I../Drivers/CMSIS/Include -I../USB_Device/App -I../USB_Device/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/usb_helpers.c" -mcpu=cortex-m0plus -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32G0B0xx -c -I../Core/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc -I../Drivers/STM32G0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32G0xx/Include -I../Drivers/CMSIS/Include -I../USB_Device/App -I../USB_Device/Target -I../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/usb_helpers.d" -MT"Core/Src/usb_helpers.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/usb_helpers.o"
 arm-none-eabi-gcc -o "Peltier_Controller_G0B0.elf" @"objects.list"   -mcpu=cortex-m0plus -T"C:\Users\arvyd\Desktop\Bakalauras\GIT\Peltier_Controller\STM32\Peltier_Controller_G0B0\STM32G0B0CETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Peltier_Controller_G0B0.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: Peltier_Controller_G0B0.elf
  
 arm-none-eabi-size  Peltier_Controller_G0B0.elf 
 arm-none-eabi-objdump -h -S Peltier_Controller_G0B0.elf  > "Peltier_Controller_G0B0.list"
    text	   data	    bss	    dec	    hex	filename
-  78212	    856	   9552	  88620	  15a2c	Peltier_Controller_G0B0.elf
+  78256	    856	   9552	  88664	  15a58	Peltier_Controller_G0B0.elf
 Finished building: default.size.stdout
  
 Finished building: Peltier_Controller_G0B0.list
  
-14:33:03 **** Incremental Build of configuration Debug for project Peltier_Controller_G0B0 ****
+07:53:20 **** Incremental Build of configuration Debug for project Peltier_Controller_G0B0 ****
 make -j16 all 
 arm-none-eabi-size  Peltier_Controller_G0B0.elf 
    text	   data	    bss	    dec	    hex	filename
-  78212	    856	   9552	  88620	  15a2c	Peltier_Controller_G0B0.elf
-Finished building: default.size.stdout
- 
-14:35:16 **** Incremental Build of configuration Debug for project Peltier_Controller_G0B0 ****
-make -j16 all 
-arm-none-eabi-size  Peltier_Controller_G0B0.elf 
-   text	   data	    bss	    dec	    hex	filename
-  78212	    856	   9552	  88620	  15a2c	Peltier_Controller_G0B0.elf
-Finished building: default.size.stdout
- 
-14:39:18 **** Incremental Build of configuration Debug for project Peltier_Controller_G0B0 ****
-make -j16 all 
-arm-none-eabi-size  Peltier_Controller_G0B0.elf 
-   text	   data	    bss	    dec	    hex	filename
-  78212	    856	   9552	  88620	  15a2c	Peltier_Controller_G0B0.elf
-Finished building: default.size.stdout
- 
-14:39:44 **** Incremental Build of configuration Debug for project Peltier_Controller_G0B0 ****
-make -j16 all 
-arm-none-eabi-size  Peltier_Controller_G0B0.elf 
-   text	   data	    bss	    dec	    hex	filename
-  78212	    856	   9552	  88620	  15a2c	Peltier_Controller_G0B0.elf
+  78256	    856	   9552	  88664	  15a58	Peltier_Controller_G0B0.elf
 Finished building: default.size.stdout
  

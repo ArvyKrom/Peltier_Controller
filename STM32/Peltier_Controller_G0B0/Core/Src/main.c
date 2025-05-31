@@ -189,7 +189,7 @@ int main(void)
 		pid_output = compute_pid_output(current_temp_inside, set_temp_inside, current_temp_outside, &Kp_Part, &Ki_Part, &Kd_Part);
 		set_vout(&hspi2, pid_output);
 
-		send_temps_via_usb(current_temp_inside, current_temp_outside);
+		send_temps_via_usb(current_temp_inside, current_temp_outside, set_temp_inside);
 		listen_for_temp_change_sent_via_usb(&set_temp_inside);
 
 		time_to_rerun_PID_loop = 0;
