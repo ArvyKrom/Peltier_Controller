@@ -9,182 +9,213 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolb
 import re
 import time
 import queue
+import os
+from PIL import Image, ImageTk
 
 class SerialMonitorApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("Serial Monitor")
+        self.root.title("Peltier Controller")
 
         self.serial_port = None
         self.read_thread = None
         self.stop_event = threading.Event()
-        self.last_port_list = []  # Track last known ports
-        self.recording = False  # Track recording state
-        self.record_file = None  # File handle for recording
-        self.record_file_path = None  # Store the file path for recording
-        self.profile_thread = None  # Thread for profile sending
-        self.temp_queue = queue.Queue()  # Queue for temperature updates from read_serial
-        self.current_temp = None  # Current temperature from serial input
-        self.current_setpoint = None  # Current setpoint being sent
+        self.last_port_list = []
+        self.recording = False
+        self.record_file = None
+        self.record_file_path = None
+        self.profile_thread = None
+        self.temp_queue = queue.Queue()
+        self.current_temp = None
+        self.current_setpoint = None
+
+        # Parameter storage
+        self.params_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "parameters.txt")
+        self.params = {"last_port": "", "last_temp": 5.0}
+        self.load_parameters()
 
         self.setup_ui()
         self.update_ports()
         self.refresh_ports_periodically()
 
-        # Prevent window resizing
         self.root.resizable(False, False)
+        self.root.protocol("WM_DELETE_WINDOW", self.on_close)
 
     def setup_ui(self):
-        frame = ttk.Frame(self.root, padding=10)
-        frame.grid()
+        # Set the window size explicitly
+        self.root.geometry("780x400")  # Fixed window size
 
-        # Section 1: COM Port and Buttons
-        ttk.Label(frame, text="COM Port:").grid(row=0, column=0, sticky="w")
-        self.port_var = tk.StringVar()
-        self.port_menu = ttk.Combobox(frame, textvariable=self.port_var, width=20, state="readonly")
-        self.port_menu.grid(row=0, column=1, sticky="w")
+        # Main frame for absolute positioning, with explicit size
+        frame = tk.Frame(self.root, width=780, height=400)  # Adjusted height to match window
+        frame.place(x=0, y=0)  # Place the frame to fill the window
 
-        self.connect_button = ttk.Button(frame, text="Connect", command=self.connect_serial)
-        self.connect_button.grid(row=0, column=2, padx=5)
+        # ------------------------------------
+        # Section 1: COM Port
+        # ------------------------------------
+        com_frame = tk.Frame(frame)
+        ttk.Label(com_frame, text="COM Port:").pack(side=tk.LEFT, padx=(0, 5))
+        self.port_var = tk.StringVar(value=self.params["last_port"])
+        self.port_menu = ttk.Combobox(com_frame, textvariable=self.port_var, width=20, state="readonly")
+        self.port_menu.pack(side=tk.LEFT, padx=(0, 5))
+        self.connect_button = ttk.Button(com_frame, text="Connect", command=self.connect_serial)
+        self.connect_button.pack(side=tk.LEFT)
 
-        self.disconnect_button = ttk.Button(frame, text="Disconnect", command=self.disconnect_serial, state="disabled")
-        self.disconnect_button.grid(row=0, column=3, padx=5)
+        # Position COM frame
+        com_frame.place(x=120, y=20)
 
-        # Separator between Section 1 and Section 2
+        # Separator between COM Port section and Terminal section
         separator1 = ttk.Separator(frame, orient="horizontal")
-        separator1.grid(row=1, column=0, columnspan=5, sticky="ew", pady=5)
+        separator1.place(x=0, y=60, width=780, height=10)
 
-        # Section 2: Terminal, Record Button, and View Button
-        self.text_area = tk.Text(frame, width=60, height=20, wrap="word")
-        self.text_area.grid(row=2, column=0, columnspan=4, pady=10, padx=(0, 5))
+        # Add SE icon to the right of the section
+
+        try:
+            original_image = Image.open("SE_icon.png")
+            # Resize the image to 20x20 pixels (adjust size as needed)
+            resized_image = original_image.resize((40, 40), Image.Resampling.LANCZOS)  # LANCZOS for high-quality resizing
+            # Convert the resized image to a PhotoImage for Tkinter
+            self.icon_image = ImageTk.PhotoImage(resized_image)
+            icon_label = tk.Label(frame, image=self.icon_image, background="white")  # White background to match frame; transparency preserved
+            icon_label.place(x=720, y=12, width=40, height=40)  # Position to the right of com_frame
+        except ImportError:
+            print("Pillow library not installed. Please install it using 'pip install Pillow'.")
+        except tk.TclError as e:
+            print(f"Failed to load icon: {e}. Please ensure 'icon.png' exists in the script directory.")
+        except Exception as e:
+            print(f"Error processing icon: {e}")
+
+
+        # ------------------------------------
+        # Section 2: Terminal
+        # ------------------------------------
+        self.text_area = tk.Text(frame, width=50, height=20, wrap="word")
+        self.text_area.place(x=20, y=60, width=500, height=290)
         self.text_area.config(state="disabled")
 
-        # Custom style for Record and View buttons with adjusted font
+        # ------------------------------------
+        # Section 2: Record, Plot, Advanced Temperature Profile and Setup Buttons
+        # ------------------------------------
         style = ttk.Style()
-        style.configure("Record.TButton", font=("Helvetica", 12))
+        style.configure("Record.TButton", font=("Helvetica", 14), foreground="black", padding=15)  # Increased font size, black text, added padding
+        style.map("Record.TButton", background=[("!disabled", "white"), ("disabled", "gray")])  # White background when enabled, gray when disabled
 
-        # Record button with original padding
-        self.record_button = ttk.Button(
-            frame,
-            text="Record",
-            command=self.toggle_recording,
-            width=10,
-            style="Record.TButton"
-        )
-        self.record_button.grid(row=2, column=4, padx=(0, 50), pady=(0, 125))
+        self.record_button = ttk.Button(frame, text="Record", command=self.toggle_recording, width=16, style="Record.TButton")  # Increased width
+        self.record_button.place(x=550, y=77)
 
-        # View button (same style as Record button)
-        self.view_button = ttk.Button(
-            frame,
-            text="View",
-            command=self.view_recording,
-            width=10,
-            style="Record.TButton"
-        )
-        self.view_button.grid(row=2, column=4, padx=(0, 50), pady=(0, 0))
+        self.view_button = ttk.Button(frame, text="Plot", command=self.view_recording, width=16, style="Record.TButton")  # Increased width
+        self.view_button.place(x=550, y=142)
+        
+        self.advanced_profile_button = ttk.Button(frame, text="Temperature Profile", command=self.open_advanced_profile_window, width=16, style="Record.TButton")  # Increased width
+        self.advanced_profile_button.place(x=550, y=207)
 
-        # Separator between Section 2 and Section 3
-        separator2 = ttk.Separator(frame, orient="horizontal")
-        separator2.grid(row=3, column=0, columnspan=5, sticky="ew", pady=5)
+        self.setup_button = ttk.Button(frame, text="Options", command=self.open_setup_window, width=16, style="Record.TButton",)  # Increased width
+        self.setup_button.place(x=550, y=272)
 
+        # Separator between Terminal section and Temperature Controls section
+        separator1 = ttk.Separator(frame, orient="horizontal")
+        separator1.place(x=0, y=350, width=780, height=10)
+
+        # ------------------------------------
         # Section 3: Temperature Controls
-        ttk.Label(frame, text="Temperature (°C):").grid(row=4, column=0, sticky="e", pady=5)
-        self.temperature_var = tk.DoubleVar()
-        self.temperature_slider = ttk.Scale(
-            frame,
-            from_=5.0,
-            to=70.0,
-            orient="horizontal",
-            variable=self.temperature_var,
-            length=400,
-            command=lambda x: self.update_temperature_from_slider(x)
-        )
-        self.temperature_slider.grid(row=4, column=1, columnspan=2, pady=5, padx=(0, 10))
-        self.temperature_var.set(5.0)
+        # ------------------------------------
+        temp_label = ttk.Label(frame, text="Temperature (°C):")
+        temp_label.place(x=20, y=360)
+
+        self.temperature_var = tk.DoubleVar(value=self.params["last_temp"])
+        self.temperature_slider = ttk.Scale(frame, from_=5.0, to=70.0, orient="horizontal", variable=self.temperature_var, length=400, command=lambda x: self.update_temperature_from_slider(x))
+        self.temperature_slider.place(x=120, y=360)
 
         self.temperature_values = [str(i) for i in range(5, 71, 5)]
-        self.temperature_combobox_var = tk.StringVar()
-        self.temperature_combobox = ttk.Combobox(
-            frame,
-            textvariable=self.temperature_combobox_var,
-            values=[f"{val} °C" for val in self.temperature_values],
-            width=10
-        )
-        self.temperature_combobox.grid(row=4, column=3, sticky="w", padx=(0, 5))
-        self.temperature_combobox_var.set("5 °C")
+        self.temperature_combobox_var = tk.StringVar(value=f"{self.params['last_temp']} °C")
+        self.temperature_combobox = ttk.Combobox(frame, textvariable=self.temperature_combobox_var, values=[f"{val} °C" for val in self.temperature_values], width=10)
+        self.temperature_combobox.place(x=550, y=360)
         self.temperature_combobox.bind("<Return>", self.update_temperature_from_combobox)
         self.temperature_combobox.bind("<FocusOut>", self.update_temperature_from_combobox)
         self.temperature_combobox.bind("<<ComboboxSelected>>", self.update_temperature_from_combobox)
 
         self.send_button = ttk.Button(frame, text="Send", command=self.send_command)
-        self.send_button.grid(row=4, column=4, padx=5, pady=5)
+        self.send_button.place(x=650, y=360)
 
-        # Advanced Temperature Profile button
-        self.advanced_profile_button = ttk.Button(
-            frame,
-            text="Advanced Temperature Profile",
-            command=self.open_advanced_profile_window
-        )
-        self.advanced_profile_button.grid(row=5, column=4, padx=5, pady=5)
 
     def open_advanced_profile_window(self):
         profile_window = tk.Toplevel(self.root)
         profile_window.title("Advanced Temperature Profile")
         profile_window.resizable(True, True)
+        profile_window.geometry("800x520")  # Window size to accommodate all widgets
 
-        control_frame = ttk.Frame(profile_window, padding=10)
-        control_frame.grid(row=0, column=0, sticky="nsew")
+        # Main frame to hold two sections: controls on the left, graph on the right
+        main_frame = tk.Frame(profile_window)
+        main_frame.pack(fill="both", expand=True, padx=10, pady=10)
 
-        ttk.Label(control_frame, text="Time (s):").grid(row=0, column=0, sticky="e", pady=5)
+        # Left side: Control widgets
+        control_frame = tk.Frame(main_frame)
+        control_frame.pack(side="left", fill="y", padx=(0, 10))
+
+        # Frame for Time and Temperature inputs (stacked vertically)
+        input_frame = tk.Frame(control_frame)
+        input_frame.pack(anchor="center", pady=(0, 5))
+
+        # Time input (label to the left of entry)
+        time_frame = tk.Frame(input_frame)
+        time_frame.pack(anchor="center", pady=(5, 5))
+        time_label = ttk.Label(time_frame, text="Time (s):", width=17, anchor="e")
+        time_label.pack(side="left")
         self.time_var = tk.StringVar()
-        time_entry = ttk.Entry(control_frame, textvariable=self.time_var, width=10)
-        time_entry.grid(row=0, column=1, padx=5, pady=5)
+        time_entry = ttk.Entry(time_frame, textvariable=self.time_var, width=10)
+        time_entry.pack(side="left", padx=(0, 5))
 
-        ttk.Label(control_frame, text="Temperature (°C):").grid(row=1, column=0, sticky="e", pady=5)
+        # Temperature input (label to the left of entry, adjusted to align)
+        temp_frame = tk.Frame(input_frame)
+        temp_frame.pack(anchor="center", pady=0)
+        temp_label = ttk.Label(temp_frame, text="Temperature (°C):", width=17, anchor="e")
+        temp_label.pack(side="left")
         self.profile_temp_var = tk.StringVar()
-        temp_entry = ttk.Entry(control_frame, textvariable=self.profile_temp_var, width=10)
-        temp_entry.grid(row=1, column=1, padx=5, pady=5)
+        temp_entry = ttk.Entry(temp_frame, textvariable=self.profile_temp_var, width=10)
+        temp_entry.pack(side="left", padx=(0, 5))
 
-        add_button = ttk.Button(
-            control_frame,
-            text="Add Point",
-            command=lambda: self.add_profile_point(profile_window)
-        )
-        add_button.grid(row=2, column=0, columnspan=2, pady=10)
+        # Frame for top buttons (Add Point and Delete Selected)
+        top_button_frame = tk.Frame(control_frame)
+        top_button_frame.pack(anchor="center", pady=5)
 
+        # Add Point button
+        add_button = ttk.Button(top_button_frame, text="Add Point", command=lambda: self.add_profile_point(profile_window), width=30)
+        add_button.pack(anchor="center", pady=1)
+
+        # Delete Selected button (below Add Point)
+        delete_button = ttk.Button(top_button_frame, text="Delete Selected", command=lambda: self.delete_profile_point(profile_window), width=30)
+        delete_button.pack(anchor="center", pady=1)
+
+        # Profile listbox
         self.profile_listbox = tk.Listbox(control_frame, width=30, height=10)
-        self.profile_listbox.grid(row=3, column=0, columnspan=2, padx=5, pady=5)
+        self.profile_listbox.pack(anchor="center", pady=5)
 
-        delete_button = ttk.Button(
-            control_frame,
-            text="Delete Selected",
-            command=lambda: self.delete_profile_point(profile_window)
-        )
-        delete_button.grid(row=4, column=0, columnspan=2, pady=5)
+        # Subframe for remaining buttons to center them
+        button_frame = tk.Frame(control_frame)
+        button_frame.pack(fill="x", pady=5)
 
-        save_button = ttk.Button(
-            control_frame,
-            text="Save Profile",
-            command=self.save_profile
-        )
-        save_button.grid(row=5, column=0, columnspan=2, pady=5)
+        # Save Profile button
+        save_button = ttk.Button(button_frame, text="Save Profile", command=self.save_profile, width=30)
+        save_button.pack(anchor="center", pady=1)
 
-        load_button = ttk.Button(
-            control_frame,
-            text="Load Profile",
-            command=lambda: self.load_profile(profile_window)
-        )
-        load_button.grid(row=6, column=0, columnspan=2, pady=5)
+        # Load Profile button
+        load_button = ttk.Button(button_frame, text="Load Profile", command=lambda: self.load_profile(profile_window), width=30)
+        load_button.pack(anchor="center", pady=1)
 
-        send_profile_button = ttk.Button(
-            control_frame,
-            text="Send Profile",
-            command=self.start_profile_sending
-        )
-        send_profile_button.grid(row=7, column=0, columnspan=2, pady=5)
+        # Send Profile button
+        send_profile_button = ttk.Button(button_frame, text="Send Profile", command=self.start_profile_sending, width=30)
+        send_profile_button.pack(anchor="center", pady=1)
+
+        # Close button
+        close_button = ttk.Button(button_frame, text="Close", command=lambda: [plt.close(self.profile_fig), profile_window.destroy()], width=30)
+        close_button.pack(anchor="center", pady=1)
+
+        # Right side: Graph and toolbar
+        graph_frame = tk.Frame(main_frame)
+        graph_frame.pack(side="right", fill="both", expand=True)
 
         self.profile_points = []
 
+        # Matplotlib figure for the graph
         self.profile_fig = plt.figure(figsize=(6, 4))
         self.profile_ax = self.profile_fig.add_subplot(111)
         self.profile_ax.set_title("Temperature Profile")
@@ -193,26 +224,16 @@ class SerialMonitorApp:
         self.profile_ax.grid(True)
         self.profile_fig.tight_layout()
 
-        self.profile_canvas = FigureCanvasTkAgg(self.profile_fig, master=profile_window)
+        # Embed the graph in the window
+        self.profile_canvas = FigureCanvasTkAgg(self.profile_fig, master=graph_frame)
         self.profile_canvas.draw()
-        self.profile_canvas.get_tk_widget().grid(row=0, column=1, padx=10, pady=10, sticky="nsew")
+        self.profile_canvas.get_tk_widget().pack(fill="both", expand=True)
 
-        toolbar = NavigationToolbar2Tk(self.profile_canvas, profile_window)
+        # Add toolbar below the graph
+        toolbar = NavigationToolbar2Tk(self.profile_canvas, graph_frame)
         toolbar.update()
-        toolbar.grid(row=1, column=1, pady=5, sticky="ew")
+        toolbar.pack(fill="x")
 
-        close_button = ttk.Button(
-            profile_window,
-            text="Close",
-            command=lambda: [plt.close(self.profile_fig), profile_window.destroy()]
-        )
-        close_button.grid(row=2, column=1, pady=10)
-
-        profile_window.grid_columnconfigure(0, weight=1)
-        profile_window.grid_columnconfigure(1, weight=2)
-        profile_window.grid_rowconfigure(0, weight=1)
-
-        self.update_profile_graph()
 
     def add_profile_point(self, profile_window):
         try:
@@ -264,13 +285,7 @@ class SerialMonitorApp:
                     else:
                         temp = self.interpolate_temperature(t + lag_offset)
                     lagged_temps.append(temp)
-                self.profile_ax.plot(
-                    lagged_times,
-                    lagged_temps,
-                    linestyle='--',
-                    color='orange',
-                    label='Sent Setpoints (150s lag)'
-                )
+                self.profile_ax.plot(lagged_times, lagged_temps, linestyle='--', color='orange', label='Sent Setpoints (150s lag)')
 
             else:
                 self.profile_ax.plot([], [], marker='o', linestyle='-', color='blue', label='Intended Profile')
@@ -283,16 +298,15 @@ class SerialMonitorApp:
         except Exception as e:
             messagebox.showerror("Error", f"Failed to update graph: {str(e)}")
 
+    def open_setup_window(self):
+        a = 5
+
     def save_profile(self):
         if not self.profile_points:
             messagebox.showinfo("Info", "No profile points to save.")
             return
 
-        file_path = filedialog.asksaveasfilename(
-            defaultextension=".txt",
-            filetypes=[("Text files", "*.txt"), ("All files", "*.*")],
-            title="Save temperature profile"
-        )
+        file_path = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=[("Text files", "*.txt"), ("All files", "*.*")], title="Save temperature profile")
         if not file_path:
             return
 
@@ -305,11 +319,7 @@ class SerialMonitorApp:
             messagebox.showerror("Error", f"Failed to save profile: {str(e)}")
 
     def load_profile(self, profile_window):
-        file_path = filedialog.askopenfilename(
-            defaultextension=".txt",
-            filetypes=[("Text files", "*.txt"), ("All files", "*.*")],
-            title="Load temperature profile"
-        )
+        file_path = filedialog.askopenfilename(defaultextension=".txt", filetypes=[("Text files", "*.txt"), ("All files", "*.*")], title="Load temperature profile")
         if not file_path:
             return
 
@@ -330,7 +340,7 @@ class SerialMonitorApp:
             self.profile_points.sort(key=lambda x: x[0])
             self.profile_listbox.delete(0, tk.END)
             for time, temp in self.profile_points:
-                self.profile_listbox.insert(tk.END, f"Time: {time:.1f}s, Temp: {temp:.1f}°C")
+                self.profile_listbox.insert(tk.END, f"Time: {t:.1f}s, Temp: {temp:.1f}°C")
             self.update_profile_graph()
             messagebox.showinfo("Success", "Profile loaded successfully.")
         except Exception as e:
@@ -435,16 +445,12 @@ class SerialMonitorApp:
         del self.profile_points[index]
         self.profile_listbox.delete(0, tk.END)
         for time, temp in self.profile_points:
-            self.profile_listbox.insert(tk.END, f"Time: {time:.1f}s, Temp: {temp:.1f}°C")
+            self.profile_listbox.insert(tk.END, f"Time: {t:.1f}s, Temp: {temp:.1f}°C")
         self.update_profile_graph()
 
     def toggle_recording(self):
         if not self.recording:
-            file_path = filedialog.asksaveasfilename(
-                defaultextension=".txt",
-                filetypes=[("Text files", "*.txt"), ("All files", "*.*")],
-                title="Select file to save terminal recording"
-            )
+            file_path = filedialog.asksaveasfilename(defaultextension=".txt", filetypes=[("Text files", "*.txt"), ("All files", "*.*")], title="Select file to save terminal recording")
             if not file_path:
                 return
             try:
@@ -468,11 +474,7 @@ class SerialMonitorApp:
             self.record_button.config(text="Record")
 
     def view_recording(self):
-        file_path = filedialog.askopenfilename(
-            defaultextension=".txt",
-            filetypes=[("Text files", "*.txt"), ("All files", "*.*")],
-            title="Select recording file to view"
-        )
+        file_path = filedialog.askopenfilename(defaultextension=".txt", filetypes=[("Text files", "*.txt"), ("All files", "*.*")], title="Select recording file to view")
         if not file_path:
             return
 
@@ -525,18 +527,10 @@ class SerialMonitorApp:
             profile_temps = []
             profile_start_time = 0.0
             if messagebox.askyesno("Load Profile", "Would you like to load a thermal profile to overlay on the graph?"):
-                profile_path = filedialog.askopenfilename(
-                    defaultextension=".txt",
-                    filetypes=[("Text files", "*.txt"), ("All files", "*.*")],
-                    title="Select thermal profile file"
-                )
+                profile_path = filedialog.askopenfilename(defaultextension=".txt", filetypes=[("Text files", "*.txt"), ("All files", "*.*")], title="Select thermal profile file")
                 if profile_path:
                     try:
-                        start_time_input = simpledialog.askstring(
-                            "Profile Start Time",
-                            "Enter the profile start time (seconds) relative to the recording start:",
-                            parent=view_window
-                        )
+                        start_time_input = simpledialog.askstring("Profile Start Time", "Enter the profile start time (seconds) relative to the recording start:", parent=view_window)
                         if start_time_input is None:
                             raise ValueError("Profile start time input cancelled.")
                         try:
@@ -572,14 +566,7 @@ class SerialMonitorApp:
             if set_inside_temps:
                 ax.plot(relative_times, set_inside_temps, linestyle='-', label='Set')
             if profile_times and profile_temps:
-                ax.plot(
-                    profile_times,
-                    profile_temps,
-                    linestyle='--',
-                    color='red',
-                    marker='o',
-                    label=f'Profile (start t={profile_start_time:.1f}s)'
-                )
+                ax.plot(profile_times, profile_temps, linestyle='--', color='red', marker='o', label=f'Profile (start t={profile_start_time:.1f}s)')
             ax.set_title("Temperature Over Time")
             ax.set_xlabel("Time (s)")
             ax.set_ylabel("Temperature (°C)")
@@ -648,8 +635,7 @@ class SerialMonitorApp:
 
         try:
             self.serial_port = serial.Serial(port, 115200, timeout=1)
-            self.root.after(0, lambda: self.connect_button.config(state="disabled"))
-            self.root.after(0, lambda: self.disconnect_button.config(state="normal"))
+            self.connect_button.config(text="Disconnect", command=self.disconnect_serial)
             self.stop_event.clear()
             self.read_thread = threading.Thread(target=self.read_serial)
             self.read_thread.daemon = True
@@ -657,7 +643,7 @@ class SerialMonitorApp:
         except Exception as e:
             messagebox.showerror("Connection Error", str(e))
 
-    def disconnect_serial(self):  # Fixed: Corrected name from 'contestants_serial' and indentation
+    def disconnect_serial(self):
         self.stop_event.set()
         if self.read_thread and self.read_thread.is_alive():
             self.read_thread.join(timeout=1)
@@ -674,15 +660,14 @@ class SerialMonitorApp:
         self.current_temp = None
         self.current_setpoint = None
         self.temp_queue.queue.clear()
-        self.root.after(0, lambda: self.connect_button.config(state="normal"))
-        self.root.after(0, lambda: self.disconnect_button.config(state="disabled"))
+        self.connect_button.config(text="Connect", command=self.connect_serial)
 
     def read_serial(self):
         while not self.stop_event.is_set():
             try:
                 if self.serial_port.in_waiting:
                     line = self.serial_port.readline().decode("utf-8", errors="replace").strip()
-                    if line:  # Check if line is not empty
+                    if line:
                         match = re.search(r"(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)", line)
                         if match:
                             inside_temp = float(match.group(1))
@@ -695,7 +680,6 @@ class SerialMonitorApp:
                             record_line = f"{timestamp}{inside_temp}, {outside_temp}, {set_inside_temp}\n"
                             self.display_output(display_line, record_line)
                 else:
-                    # Small sleep to prevent CPU overuse when no data is available
                     time.sleep(0.01)
             except (serial.SerialException, IOError) as e:
                 self.display_output(f"{datetime.datetime.now().strftime('[%H:%M:%S] ')}Error: Device disconnected ({str(e)})\n")
@@ -741,6 +725,28 @@ class SerialMonitorApp:
                     messagebox.showerror("File Error", f"Failed to write to file: {str(e)}")
         self.root.after(0, update_text)
 
+    def load_parameters(self):
+        try:
+            if os.path.exists(self.params_file):
+                with open(self.params_file, "r", encoding="utf-8") as f:
+                    for line in f:
+                        if "=" in line:
+                            key, value = line.strip().split("=", 1)
+                            if key == "last_port":
+                                self.params["last_port"] = value
+                            elif key == "last_temp":
+                                self.params["last_temp"] = float(value)
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to load parameters: {str(e)}")
+
+    def save_parameters(self):
+        try:
+            with open(self.params_file, "w", encoding="utf-8") as f:
+                f.write(f"last_port={self.port_var.get()}\n")
+                f.write(f"last_temp={self.temperature_var.get()}\n")
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to save parameters: {str(e)}")
+
     def on_close(self):
         if self.recording and self.record_file is not None:
             try:
@@ -750,10 +756,10 @@ class SerialMonitorApp:
             finally:
                 self.record_file = None
         self.disconnect_serial()
+        self.save_parameters()
         self.root.destroy()
 
 if __name__ == "__main__":
     root = tk.Tk()
     app = SerialMonitorApp(root)
-    root.protocol("WM_DELETE_WINDOW", app.on_close)
     root.mainloop()
