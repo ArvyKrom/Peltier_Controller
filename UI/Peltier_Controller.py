@@ -445,11 +445,18 @@ class SerialMonitorApp:
             return
 
         try:
+            temp_had_changed = True
             if not self.first_point_sent:
                 target_temp = self.profile_points[0][1]
                 temp = target_temp
             else:
                 temp = self.interpolate_temperature(self.current_time)
+                if self.current_time != 0:
+                    if temp != self.interpolate_temperature(self.current_time - 1):
+                        temp_had_changed = True
+                    else:
+                        temp_had_changed = False
+                
 
             timestamp = datetime.datetime.now().strftime('[%H:%M:%S] ')
             command = f"{temp:.1f}\n"
@@ -462,21 +469,25 @@ class SerialMonitorApp:
                 self.serial_port.flush()
                 self.current_setpoint = temp
                 if self.current_temp is not None:
-                    if abs(self.current_temp - target_temp) <= 0.5:
+                    if self.current_temp - target_temp == 0:
                         self.first_point_sent = True
+                        self.display_output(f"{timestamp}Reached the first point's temperature: {target_temp}°C\n")
+                        self.display_output(f"{timestamp}Continuing profile transmission\n")
                         self.first_point_message_sent = False
             else:
-                self.display_output(f"{timestamp}Sent: {command}")
-                self.serial_port.write(command.encode('utf-8'))
-                self.serial_port.flush()
-                self.current_setpoint = temp
+                if temp_had_changed:
+                    self.display_output(f"{timestamp}Sent: {command}")
+                    self.serial_port.write(command.encode('utf-8'))
+                    self.serial_port.flush()
+                    self.current_setpoint = temp
 
-            current_time = time.time()
-            if current_time - self.last_update_time >= 1.0:
-                self.current_time += 1.0
-                self.last_update_time = current_time
+            if self.first_point_sent:
+                current_time = time.time()
+                if current_time - self.last_update_time >= 1.0:
+                    self.current_time += 1.0
+                    self.last_update_time = current_time
 
-            self.root.after(50, self.send_profile_step)
+            self.root.after(1000, self.send_profile_step)
         except Exception as e:
             self.display_output(f"{datetime.datetime.now().strftime('[%H:%M:%S] ')}Send Error: {str(e)}\n")
             self.profile_running = False
