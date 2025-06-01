@@ -1,2 +1,2 @@
-last_port=COM1
-last_temp=5.0
+last_port=COM6
+last_temp=19.8

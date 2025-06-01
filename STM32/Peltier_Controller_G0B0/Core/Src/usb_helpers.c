@@ -10,14 +10,21 @@ void send_temps_via_usb(double current_temp_inside, double current_temp_outside,
 	CDC_Transmit_FS(usb_tx_data, 25);
 }
 
-void listen_for_temp_change_sent_via_usb(double *set_temp_inside){
+void send_stop_following_profile(){
+	uint8_t usb_tx_data[10] = {'S','T','O','P','\n'};
+	CDC_Transmit_FS(usb_tx_data, 10);
+}
+
+void listen_to_usb(double *set_temp_inside, int *is_following_profile){
 	uint32_t len = 20;
 	static uint8_t usb_rx_data[20] = {0};
 	CDC_Receive(usb_rx_data, &len);
 
-	if(usb_rx_data[0] != '\0' && string_to_double(usb_rx_data, 20, set_temp_inside) != 1){
+	if(usb_rx_data[0] == 'P') // Stands for Profile
+		*is_following_profile = 1;
+
+	if(usb_rx_data[0] != '\0' && string_to_double(usb_rx_data, 20, set_temp_inside) != 1)
 		memset(usb_rx_data, 0, 20);
-	}
 }
 
 
@@ -30,10 +37,11 @@ int string_to_double(uint8_t *data, uint8_t size, double *result){
 
 	*result = temp;
 	return 0;
-
 }
+
 int put_temps_into_char_array(double temp1, double temp2, double temp3, uint8_t *char_array, uint8_t size){
 	memset(char_array,0, size);
 	snprintf((char*)char_array, size, "%.1lf, %.1lf, %.1lf\n\r", temp1, temp2, temp3);
 	return 0;
 }
+

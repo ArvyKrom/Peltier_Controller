@@ -63,6 +63,7 @@ int time_to_rerun_PID_loop = 0;
 int time_to_refresh_OLED = 0;
 int temp_down_btn_is_pressed_down = 0;
 int temp_up_btn_is_pressed_down = 0;
+int is_following_profile = 0;
 double set_temp_inside = 0;
 
 double current_temp_inside = 0;
@@ -190,7 +191,7 @@ int main(void)
 		set_vout(&hspi2, pid_output);
 
 		send_temps_via_usb(current_temp_inside, current_temp_outside, set_temp_inside);
-		listen_for_temp_change_sent_via_usb(&set_temp_inside);
+		listen_to_usb(&set_temp_inside, &is_following_profile);
 
 		time_to_rerun_PID_loop = 0;
 	}
@@ -641,6 +642,12 @@ void HAL_GPIO_EXTI_Falling_Callback(uint16_t GPIO_Pin){
     	set_temp_inside += 0.1 ;
     	temp_up_btn_is_pressed_down = 1;
     }
+
+    if(is_following_profile){
+    	send_stop_following_profile();
+    	is_following_profile = 0;
+    }
+
     htim16.Instance->CNT = 0;
     __HAL_TIM_CLEAR_FLAG(&htim16, TIM_FLAG_UPDATE); // So that timer ran for the first time does not immediately raise an interrupt
     HAL_TIM_Base_Start_IT(&htim16);
