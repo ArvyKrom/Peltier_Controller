@@ -160,13 +160,15 @@ int main(void)
 	  HAL_Delay(500);
   }
 
-//  while(is_load_connected(&hspi2, &hadc1)!=1){
-//	  Oled_cursor(&oled, 0, 0);
-//	  Oled_string(&oled, "Missing");
-//	  Oled_cursor(&oled, 1, 0);
-//	  Oled_string(&oled, "Peltier");
-//	  HAL_Delay(500);
-//  }
+  while(is_load_connected(&hspi2, &hadc1)!=1){
+	  Oled_cursor(&oled, 0, 0);
+	  Oled_string(&oled, "Missing");
+	  Oled_cursor(&oled, 1, 0);
+	  Oled_string(&oled, "Peltier");
+	  HAL_Delay(500);
+  }
+
+  Oled_clear(&oled);
 
   while(read_temp(&hi2c2, TMP1075_2_addr, &current_temp_inside) != 0){}
   set_temp_inside = current_temp_inside;

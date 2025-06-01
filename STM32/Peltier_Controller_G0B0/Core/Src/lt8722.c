@@ -96,7 +96,7 @@ int is_load_connected(SPI_HandleTypeDef *hspi, ADC_HandleTypeDef *hadc){
 
 	double Iout = (V1P65 - VIOut) * 8;
 
-	if (Iout >= 0.2){
+	if (Iout >= 0.5){
 		return 1;
 	}
 	return 0;
