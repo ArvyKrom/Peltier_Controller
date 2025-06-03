@@ -65,8 +65,11 @@ int LT8722_Init(SPI_HandleTypeDef *hspi){
 }
 
 int is_load_connected(SPI_HandleTypeDef *hspi, ADC_HandleTypeDef *hadc){
+	double VIOut_avg = 0;
+	double V1P65_avg = 0;
+
 	// First we put some voltage on the output
-	if(set_vout(hspi, 6.0) != 0)
+	if(set_vout(hspi, 10.0) != 0)
 		return 0;
 
 	// Change AMUX so that AOUT gives out V1P65
@@ -75,11 +78,13 @@ int is_load_connected(SPI_HandleTypeDef *hspi, ADC_HandleTypeDef *hadc){
 	if(write_lt8722_reg(hspi, &reg, &data_to_send, 1)!=0)
 		return 0;
 
-	// Read the V1P65
-	HAL_ADC_Start(hadc);
-	while(HAL_ADC_PollForConversion(hadc, HAL_MAX_DELAY) != HAL_OK){}
-	double V1P65 = HAL_ADC_GetValue(hadc) * 3.3 / 4096;
-	HAL_ADC_Stop(hadc);
+	// Read the V1P65 5 times
+	for(int i = 0;i <5;i++){
+		HAL_ADC_Start(hadc);
+		while(HAL_ADC_PollForConversion(hadc, HAL_MAX_DELAY) != HAL_OK){}
+		V1P65_avg += HAL_ADC_GetValue(hadc) * 3.3 / 4096;
+	}
+	V1P65_avg /= 5;
 
 	// Change AMUX so that AOUT gives out VIout
 	data_to_send = SPIS_AMUX_Reg_To_Read_Iout_Val;
@@ -87,18 +92,20 @@ int is_load_connected(SPI_HandleTypeDef *hspi, ADC_HandleTypeDef *hadc){
 		return 0;
 
 	// Read the VIout
-	HAL_ADC_Start(hadc);
-	while(HAL_ADC_PollForConversion(hadc, HAL_MAX_DELAY) != HAL_OK){}
-	double VIOut = HAL_ADC_GetValue(hadc) * 3.3 / 4096;
-	HAL_ADC_Stop(hadc);
-
+	for(int i = 0;i <5;i++){
+		HAL_ADC_Start(hadc);
+		while(HAL_ADC_PollForConversion(hadc, HAL_MAX_DELAY) != HAL_OK){}
+		VIOut_avg += HAL_ADC_GetValue(hadc) * 3.3 / 4096;
+	}
+	VIOut_avg /= 5;
 	// Calculate the current
 
-	double Iout = (V1P65 - VIOut) * 8;
+	double Iout = (V1P65_avg - VIOut_avg) * 8;
 
-	if (Iout >= 0.5){
+	if (Iout <= -0.8){
 		return 1;
 	}
+
 	return 0;
 
 }

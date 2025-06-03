@@ -1,0 +1,227 @@
+#include <stdint.h>
+#include "main.h"
+#include "lt8722.h"
+
+int LT8722_Init(SPI_HandleTypeDef *hspi){
+
+
+	// Initialization is done based on LT8722 datasheet provided steps
+
+	// --- Step #1 Enable_REQ bit to 1 ---
+
+	// Take the default SPIS_REG value and add 1 to [0] place
+	uint8_t data_to_send[4] = {0x00, 0x0A, 0xA2, 0x15};
+	uint8_t reg = SPIS_Command_Reg_Addr;
+
+	if(write_lt8722_reg(hspi, &reg, data_to_send, 4) != 0)
+		return 1;
+
+	// --- Step #2 Set SPIS_DAC register to 0xFF00 0000
+	data_to_send[0] = 0xFF;
+	data_to_send[1] = 0x00;
+	data_to_send[2] = 0x00;
+	data_to_send[3] = 0x00;
+	reg = SPIS_DAC_Reg_Addr;
+
+	if(write_lt8722_reg(hspi, &reg, data_to_send, 4) != 0)
+		return 1;
+
+	// --- Step #3 Clear SPI_Status register
+
+	data_to_send[0] = 0x00;
+	reg = SPIS_Status_Reg_Addr;
+
+	if(write_lt8722_reg(hspi, &reg, data_to_send, 4) != 0)
+		return 1;
+
+	HAL_Delay(1); //Waiting for prebiased output condition to dissipate
+
+	// --- Step #4 Slowly turn down SPIS_DAC code to 0x0000 0000
+	// This should be done not quicker than in 5 ms.
+
+	reg = SPIS_DAC_Reg_Addr;
+
+	for(int i=1; i <= 17;i++){
+		data_to_send[0] = 255 - 15*i;
+		if(write_lt8722_reg(hspi, &reg, data_to_send, 4) != 0)
+			return 1;
+		HAL_Delay(1);
+	}
+
+	// --- Step #5 Enable PWM switching by raising the SWEN pin and writing SWEN_REQ bit 1
+
+	HAL_GPIO_WritePin(LT8722_SWEN_GPIO_Port,LT8722_SWEN_Pin, SET);
+
+	data_to_send[0] = 0x00;
+	data_to_send[1] = 0x0A;
+	data_to_send[2] = 0xA2;
+	data_to_send[3] = 0x17;
+	reg = SPIS_Command_Reg_Addr;
+
+	if(write_lt8722_reg(hspi, &reg, data_to_send, 4) != 0)
+		return 1;
+
+	return 0;
+}
+
+int is_load_connected(SPI_HandleTypeDef *hspi, ADC_HandleTypeDef *hadc){
+	double VIOut_avg = 0;
+	double V1P65_avg = 0;
+
+	// First we put some voltage on the output
+	if(set_vout(hspi, 10.0) != 0)
+		return 0;
+
+	// Change AMUX so that AOUT gives out V1P65
+	uint8_t reg = SPIS_AMUX_Reg_Addr;
+	uint8_t data_to_send = SPIS_AMUX_Reg_To_Read_V1P65_Val;
+	if(write_lt8722_reg(hspi, &reg, &data_to_send, 1)!=0)
+		return 0;
+
+	HAL_Delay(50);
+
+	// Read the V1P65 5 times
+	for(int i = 0;i <5;i++){
+		HAL_ADC_Start(hadc);
+		while(HAL_ADC_PollForConversion(hadc, HAL_MAX_DELAY) != HAL_OK){}
+		V1P65_avg += HAL_ADC_GetValue(hadc) * 3.3 / 4096;
+	}
+	V1P65_avg /= 5;
+
+	HAL_Delay(50);
+
+	// Change AMUX so that AOUT gives out VIout
+	data_to_send = SPIS_AMUX_Reg_To_Read_Iout_Val;
+	if(write_lt8722_reg(hspi, &reg, &data_to_send, 1)!=0)
+		return 0;
+
+	// Read the VIout
+	for(int i = 0;i <5;i++){
+		HAL_ADC_Start(hadc);
+		while(HAL_ADC_PollForConversion(hadc, HAL_MAX_DELAY) != HAL_OK){}
+		VIOut_avg += HAL_ADC_GetValue(hadc) * 3.3 / 4096;
+	}
+	VIOut_avg /= 5;
+	// Calculate the current
+
+	double Iout = (V1P65_avg - VIOut_avg) * 8;
+
+	if (Iout <= -1){
+		return 1;
+	}
+
+	return 0;
+
+}
+
+int read_lt8722_reg(SPI_HandleTypeDef *hspi, uint8_t *reg_addr, uint8_t *data, uint8_t size){
+
+	uint8_t tx_data[8] = {Data_Read_Command,*reg_addr,0x00,0x00,0x00,0x00,0x00,0x00};
+	tx_data[2] = get_CRC8(tx_data, 2);
+
+	HAL_GPIO_WritePin(LT8722_CS_GPIO_Port, LT8722_CS_Pin, RESET);
+	if(HAL_SPI_TransmitReceive(hspi, tx_data, data, 8, 100)!=HAL_OK)
+		return 1;
+	HAL_GPIO_WritePin(LT8722_CS_GPIO_Port, LT8722_CS_Pin, SET);
+
+	return 0;
+}
+
+int set_vout(SPI_HandleTypeDef *hspi, double vout){
+	uint8_t SPIS_DAC_Code[4] = {0};
+	uint8_t reg = SPIS_DAC_Reg_Addr;
+	uint32_t code = 0;
+
+	if(vout > MAX_POS_Vout){
+		SPIS_DAC_Code[0] = 0xFF;
+		SPIS_DAC_Code[1] = (uint8_t) ((MIN_POS_SPIS_DAC_Code & 0x00FF0000)>>16);
+		SPIS_DAC_Code[2] = (uint8_t) ((MIN_POS_SPIS_DAC_Code & 0x0000FF00)>>8);
+		SPIS_DAC_Code[3] = (uint8_t) ((MIN_POS_SPIS_DAC_Code & 0x000000FF));
+		write_lt8722_reg(hspi, &reg, SPIS_DAC_Code, 4);
+		return 0;
+	}
+	if(vout > 0){
+		code = (MIN_POS_SPIS_DAC_Code & 0xFFFFFF) + ((MAX_POS_Vout-vout)/MAX_POS_Vout) * (0xFFFFFF - (MIN_POS_SPIS_DAC_Code & 0xFFFFFF));
+		SPIS_DAC_Code[0] = 0xFF;
+		SPIS_DAC_Code[1] = (uint8_t) ((code & 0x00FF0000)>>16);
+		SPIS_DAC_Code[2] = (uint8_t) ((code & 0x0000FF00)>>8);
+		SPIS_DAC_Code[3] = (uint8_t) ((code & 0x000000FF));
+		write_lt8722_reg(hspi, &reg, SPIS_DAC_Code, 4);
+		return 0;
+	}
+	if(vout < MAX_NEG_Vout){
+		SPIS_DAC_Code[0] = 0x00;
+		SPIS_DAC_Code[1] = (uint8_t) ((MAX_NEG_SPIS_DAC_Code & 0x00FF0000)>>16);
+		SPIS_DAC_Code[2] = (uint8_t) ((MAX_NEG_SPIS_DAC_Code & 0x0000FF00)>>8);
+		SPIS_DAC_Code[3] = (uint8_t) ((MAX_NEG_SPIS_DAC_Code & 0x000000FF));
+		write_lt8722_reg(hspi, &reg, SPIS_DAC_Code, 4);
+		return 0;
+	}
+	if(vout < 0){
+		code = (vout/MAX_NEG_Vout) * (MAX_NEG_SPIS_DAC_Code & 0x00FFFFFF);
+		SPIS_DAC_Code[0] = 0x00;
+		SPIS_DAC_Code[1] = (uint8_t) ((code & 0x00FF0000)>>16);
+		SPIS_DAC_Code[2] = (uint8_t) ((code & 0x0000FF00)>>8);
+		SPIS_DAC_Code[3] = (uint8_t) ((code & 0x000000FF));
+		write_lt8722_reg(hspi, &reg, SPIS_DAC_Code, 4);
+		return 0;
+	}
+	write_lt8722_reg(hspi, &reg, SPIS_DAC_Code, 4);
+	return 0;
+}
+
+
+int write_lt8722_reg(SPI_HandleTypeDef *hspi, uint8_t *reg_addr, uint8_t *data, uint8_t size){
+
+	if (size > 4)
+		return 1;
+
+	uint8_t tx_data[8] = {Data_Write_Command,*reg_addr,0x00,0x00,0x00,0x00,0x00,0x00};
+
+	for (int i=0;i<size;i++){
+		tx_data[i+2] = data[i];
+	}
+	uint8_t rx_data[8] = {0};
+
+	tx_data[6] = get_CRC8(tx_data, 6);
+
+	HAL_GPIO_WritePin(LT8722_CS_GPIO_Port, LT8722_CS_Pin, RESET);
+	HAL_SPI_TransmitReceive(hspi, tx_data, rx_data, 8, 100);
+	HAL_GPIO_WritePin(LT8722_CS_GPIO_Port, LT8722_CS_Pin, SET);
+	if(rx_data[7] != SLAVE_ACK)
+		return 1;
+
+	return 0;
+}
+
+int status_aq(SPI_HandleTypeDef *hspi){
+	uint8_t tx_data[6] = {Status_Acquisition_Command,0xFF,0xFF,0xFF,0xFF,0xFF};
+	tx_data[2] = get_CRC8(tx_data, 2);
+	uint8_t rx_data[6] = {0};
+
+	HAL_GPIO_WritePin(LT8722_CS_GPIO_Port, LT8722_CS_Pin, RESET);
+
+	if(HAL_SPI_TransmitReceive(hspi, tx_data, rx_data, 6, 100)!=HAL_OK)
+		return 1;
+	HAL_GPIO_WritePin(LT8722_CS_GPIO_Port, LT8722_CS_Pin, SET);
+	return 0;
+}
+
+uint8_t get_CRC8(const uint8_t *data, uint16_t length) {
+    uint8_t crc = 0x00;               // Initial value
+    uint8_t polynomial = 0x07;        // CRC-8 polynomial
+
+    for (uint16_t i = 0; i < length; i++) {
+        crc ^= data[i];               // XOR-in byte into CRC
+
+        for (uint8_t j = 0; j < 8; j++) {
+            if (crc & 0x80) {
+                crc = (crc << 1) ^ polynomial;
+            } else {
+                crc <<= 1;
+            }
+        }
+    }
+
+    return crc;
+}

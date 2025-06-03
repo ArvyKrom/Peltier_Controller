@@ -1,7 +1,7 @@
 ../Core/Src/lt8722.c:5:5:LT8722_Init	7
-../Core/Src/lt8722.c:67:5:is_load_connected	7
-../Core/Src/lt8722.c:106:5:read_lt8722_reg	2
-../Core/Src/lt8722.c:119:5:set_vout	5
-../Core/Src/lt8722.c:163:5:write_lt8722_reg	4
-../Core/Src/lt8722.c:186:5:status_aq	2
-../Core/Src/lt8722.c:199:9:get_CRC8	4
+../Core/Src/lt8722.c:67:5:is_load_connected	9
+../Core/Src/lt8722.c:113:5:read_lt8722_reg	2
+../Core/Src/lt8722.c:126:5:set_vout	5
+../Core/Src/lt8722.c:170:5:write_lt8722_reg	4
+../Core/Src/lt8722.c:193:5:status_aq	2
+../Core/Src/lt8722.c:206:9:get_CRC8	4

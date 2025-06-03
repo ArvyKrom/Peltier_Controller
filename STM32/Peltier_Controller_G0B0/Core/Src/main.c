@@ -55,6 +55,7 @@ I2C_HandleTypeDef hi2c2;
 SPI_HandleTypeDef hspi2;
 
 TIM_HandleTypeDef htim7;
+TIM_HandleTypeDef htim14;
 TIM_HandleTypeDef htim16;
 TIM_HandleTypeDef htim17;
 
@@ -65,6 +66,7 @@ int temp_down_btn_is_pressed_down = 0;
 int temp_up_btn_is_pressed_down = 0;
 int is_following_profile = 0;
 double set_temp_inside = 0;
+int button_is_bouncing = 0;
 
 double current_temp_inside = 0;
 double current_temp_outside = 0;
@@ -85,6 +87,7 @@ static void MX_TIM17_Init(void);
 static void MX_SPI2_Init(void);
 static void MX_TIM16_Init(void);
 static void MX_TIM7_Init(void);
+static void MX_TIM14_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -130,6 +133,7 @@ int main(void)
   MX_SPI2_Init();
   MX_TIM16_Init();
   MX_TIM7_Init();
+  MX_TIM14_Init();
   /* USER CODE BEGIN 2 */
 
   HAL_Delay(50); // Stabilize voltage for OLED
@@ -141,7 +145,7 @@ int main(void)
 
   double current_temp_inside = 0;
   double current_temp_outside = 0;
-  // Check if Thermometers are connected
+  // Check if Thermometers are connected an read current inside temp
   while(read_temp(&hi2c2, TMP1075_1_addr, &current_temp_outside) != 0 || read_temp(&hi2c2, TMP1075_2_addr, &current_temp_inside) != 0 ){
 	  Oled_cursor(&oled, 0, 0);
 	  Oled_string(&oled, "Missing");
@@ -149,6 +153,8 @@ int main(void)
 	  Oled_string(&oled, "Thermo");
 	  HAL_Delay(500);
   }
+
+  set_temp_inside = current_temp_inside;
 
   Oled_clear(&oled);
 
@@ -160,18 +166,32 @@ int main(void)
 	  HAL_Delay(500);
   }
 
-  while(is_load_connected(&hspi2, &hadc1)!=1){
-	  Oled_cursor(&oled, 0, 0);
-	  Oled_string(&oled, "Missing");
-	  Oled_cursor(&oled, 1, 0);
-	  Oled_string(&oled, "Peltier");
+  HAL_Delay(500);
+
+  int tries = 0;
+  int successful_load_detection_count = 0;
+
+  while(successful_load_detection_count < 2){
+
+	  if(is_load_connected(&hspi2, &hadc1) == 1){
+		  successful_load_detection_count++;
+	  }
+	  else{
+		  successful_load_detection_count = 0;
+	  }
+	  tries++;
+
+	  if(tries > 6){
+		  Oled_cursor(&oled, 0, 0);
+		  Oled_string(&oled, "Missing");
+		  Oled_cursor(&oled, 1, 0);
+		  Oled_string(&oled, "Peltier");
+	  }
 	  HAL_Delay(500);
   }
 
   Oled_clear(&oled);
 
-  while(read_temp(&hi2c2, TMP1075_2_addr, &current_temp_inside) != 0){}
-  set_temp_inside = current_temp_inside;
   double pid_output = 0;
 
   HAL_TIM_Base_Start_IT(&htim17); // Starting PID timer. Period 1 second.
@@ -187,15 +207,17 @@ int main(void)
     /* USER CODE BEGIN 3 */
 
 	if(time_to_rerun_PID_loop){
-		read_temp(&hi2c2, TMP1075_2_addr, &current_temp_inside);
-		read_temp(&hi2c2, TMP1075_1_addr, &current_temp_outside);
+		time_to_rerun_PID_loop = 0;
+		if(read_temp(&hi2c2, TMP1075_2_addr, &current_temp_inside) != 0)
+			continue;
+		if(read_temp(&hi2c2, TMP1075_1_addr, &current_temp_outside) != 0)
+			continue;
 		pid_output = compute_pid_output(current_temp_inside, set_temp_inside, current_temp_outside, &Kp_Part, &Ki_Part, &Kd_Part);
 		set_vout(&hspi2, pid_output);
 
 		send_temps_via_usb(current_temp_inside, current_temp_outside, set_temp_inside);
 		listen_to_usb(&set_temp_inside, &is_following_profile);
 
-		time_to_rerun_PID_loop = 0;
 	}
 	if(time_to_refresh_OLED){
 		refresh_displayed_info(&oled, set_temp_inside, current_temp_inside);
@@ -436,6 +458,37 @@ static void MX_TIM7_Init(void)
 }
 
 /**
+  * @brief TIM14 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM14_Init(void)
+{
+
+  /* USER CODE BEGIN TIM14_Init 0 */
+
+  /* USER CODE END TIM14_Init 0 */
+
+  /* USER CODE BEGIN TIM14_Init 1 */
+
+  /* USER CODE END TIM14_Init 1 */
+  htim14.Instance = TIM14;
+  htim14.Init.Prescaler = 48000-1;
+  htim14.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim14.Init.Period = 100-1;
+  htim14.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim14.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim14) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM14_Init 2 */
+
+  /* USER CODE END TIM14_Init 2 */
+
+}
+
+/**
   * @brief TIM16 Initialization Function
   * @param None
   * @retval None
@@ -586,6 +639,10 @@ static void MX_GPIO_Init(void)
 
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
+    if (htim->Instance == TIM14) { //Debouncer
+    	button_is_bouncing = 0;
+    	HAL_TIM_Base_Stop_IT(&htim14);
+    }
     if (htim->Instance == TIM17) { //PID and USB timer
     	time_to_rerun_PID_loop = 1;
     	HAL_GPIO_TogglePin(RED_LED_GPIO_Port, RED_LED_Pin);
@@ -593,17 +650,34 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 
     if (htim->Instance == TIM16) { //Button pressed time counting timer
 
-    	// ----------- REVISIT THIS. SPEED CARRIES OVER IF DIFFERENT BUTTON IS PRESSED RIGHT AFTER ANOTHER IS RELEASED -----------------
-
     	double temp_change_speeds[] = {0.5, 1, 2, 5};
     	static int speed_index = 0;
     	static int period_counter = 0;
+    	static int previously_pressed_down_button = 2; // 0 for down, 1 for up
+
+    	if(previously_pressed_down_button != 0 && temp_down_btn_is_pressed_down){
+    		period_counter = 0;
+    		speed_index = 0;
+    		previously_pressed_down_button = 0;
+    	}
+
+    	if(previously_pressed_down_button != 1 && temp_up_btn_is_pressed_down){
+    		period_counter = 0;
+    		speed_index = 0;
+    		previously_pressed_down_button = 1;
+    	}
+
     	if(temp_down_btn_is_pressed_down){
 			if(HAL_GPIO_ReadPin(Temp_Down_Btn_GPIO_Port, Temp_Down_Btn_Pin) == 0){
-				set_temp_inside -= temp_change_speeds[speed_index];
-				period_counter++;
-				if(speed_index != 3)
-					speed_index = period_counter/3;
+				if(set_temp_inside - temp_change_speeds[speed_index] < MIN_Temp){
+					set_temp_inside = MIN_Temp;
+				}
+				else{
+					set_temp_inside -= temp_change_speeds[speed_index];
+					period_counter++;
+					if(speed_index != 3)
+						speed_index = period_counter/3;
+				}
 			}
 			else{
 				temp_down_btn_is_pressed_down = 0;
@@ -614,10 +688,15 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
     	}
     	if(temp_up_btn_is_pressed_down){
 			if(HAL_GPIO_ReadPin(Temp_Up_Btn_GPIO_Port, Temp_Up_Btn_Pin) == 0){
-				set_temp_inside += temp_change_speeds[speed_index];;
-				period_counter++;
-				if(speed_index != 3)
-					speed_index = period_counter/3;
+				if(set_temp_inside + temp_change_speeds[speed_index] > MAX_Temp){
+					set_temp_inside = MAX_Temp;
+				}
+				else{
+					set_temp_inside += temp_change_speeds[speed_index];
+					period_counter++;
+					if(speed_index != 3)
+						speed_index = period_counter/3;
+				}
 			}
 			else{
 				temp_up_btn_is_pressed_down = 0;
@@ -636,23 +715,42 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 
 }
 void HAL_GPIO_EXTI_Falling_Callback(uint16_t GPIO_Pin){
-    if (GPIO_Pin == Temp_Down_Btn_Pin) {
-    	set_temp_inside -= 0.1 ;
-    	temp_down_btn_is_pressed_down = 1;
-    }
-    if (GPIO_Pin == Temp_Up_Btn_Pin) {
-    	set_temp_inside += 0.1 ;
-    	temp_up_btn_is_pressed_down = 1;
-    }
+	if(button_is_bouncing != 1){
+		if (GPIO_Pin == Temp_Down_Btn_Pin) {
+			if(set_temp_inside -0.1 < MIN_Temp){
+				set_temp_inside = MIN_Temp;
+			}
+			else{
+				set_temp_inside -= 0.1 ;
+			}
+			temp_down_btn_is_pressed_down = 1;
+			temp_up_btn_is_pressed_down = 0;
+		}
+		if (GPIO_Pin == Temp_Up_Btn_Pin) {
+			if(set_temp_inside + 0.1 > MAX_Temp){
+				set_temp_inside = MAX_Temp;
+			}
+			else{
+				set_temp_inside += 0.1;
+			}
+			temp_up_btn_is_pressed_down = 1;
+			temp_down_btn_is_pressed_down = 0;
+		}
+		button_is_bouncing = 1;
 
-    if(is_following_profile){
-    	send_stop_following_profile();
-    	is_following_profile = 0;
-    }
+		htim14.Instance->CNT = 0;
+		__HAL_TIM_CLEAR_FLAG(&htim14, TIM_FLAG_UPDATE); // So that timer ran for the first time does not immediately raise an interrupt
+		HAL_TIM_Base_Start_IT(&htim14); // Debouncing timer;
 
-    htim16.Instance->CNT = 0;
-    __HAL_TIM_CLEAR_FLAG(&htim16, TIM_FLAG_UPDATE); // So that timer ran for the first time does not immediately raise an interrupt
-    HAL_TIM_Base_Start_IT(&htim16);
+		if(is_following_profile){
+			send_stop_following_profile();
+			is_following_profile = 0;
+		}
+
+		htim16.Instance->CNT = 0;
+		__HAL_TIM_CLEAR_FLAG(&htim16, TIM_FLAG_UPDATE); // So that timer ran for the first time does not immediately raise an interrupt
+		HAL_TIM_Base_Start_IT(&htim16);
+	}
 }
 
 /* USER CODE END 4 */

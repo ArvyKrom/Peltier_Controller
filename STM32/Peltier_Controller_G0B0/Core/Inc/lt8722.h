@@ -18,12 +18,16 @@
 #define SPIS_AMUX_Reg_To_Read_V1P25_Val 0x46
 #define SPIS_AMUX_Reg_To_Read_Iout_Val 0x44
 #define SPIS_AMUX_Reg_To_Read_V1P65_Val 0x47
+#define SPIS_AMUX_Reg_To_Read_Vcc_Val 0x4A
 #define SPIS_Command_Reg_Default_Val 0x0AA214
 
 #define MIN_POS_SPIS_DAC_Code 0xFF7A0000 // Shouldn't use lower than this
 #define MAX_POS_Vout 10.14
 #define MAX_NEG_SPIS_DAC_Code 0x008B0000 // Shouldn't use higher than this
 #define MAX_NEG_Vout -10.50
+
+#define MAX_Temp 70
+#define MIN_Temp 5
 
 int LT8722_Init(SPI_HandleTypeDef *hspi);
 int read_lt8722_reg(SPI_HandleTypeDef *hspi, uint8_t *reg_addr, uint8_t *data, uint8_t size);

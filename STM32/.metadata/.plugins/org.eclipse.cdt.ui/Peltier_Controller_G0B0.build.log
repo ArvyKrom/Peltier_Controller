@@ -1,10 +1,10 @@
-20:51:50 **** Incremental Build of configuration Debug for project Peltier_Controller_G0B0 ****
+16:50:08 **** Incremental Build of configuration Debug for project Peltier_Controller_G0B0 ****
 make -j16 all 
 arm-none-eabi-size  Peltier_Controller_G0B0.elf 
    text	   data	    bss	    dec	    hex	filename
-  80188	    856	   9552	  90596	  161e4	Peltier_Controller_G0B0.elf
+  80516	    864	   9656	  91036	  1639c	Peltier_Controller_G0B0.elf
 Finished building: default.size.stdout
  
 
-20:51:51 Build Finished. 0 errors, 0 warnings. (took 447ms)
+16:50:08 Build Finished. 0 errors, 0 warnings. (took 453ms)
 

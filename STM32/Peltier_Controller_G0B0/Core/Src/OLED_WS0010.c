@@ -57,25 +57,42 @@ Oled_HandleTypeDef Oled_init(GPIO_TypeDef* rs_port, uint16_t rs_pin,
 	return oled;
 }
 void refresh_displayed_info( Oled_HandleTypeDef *oled, double set_temp_inside, double current_temp_inside){
-	char set_temp_inside_string [8] = {0};
-	char current_temp_inside_string [8] = {0};
+	char set_temp_inside_string [] = {' ',' ',' ',' ',' ',' '};
+	char current_temp_inside_string [] = {' ',' ',' ',' ',' ',' '};
 	char celsius_unit[] = {223, 'C', '\0'}; // 223 stands for °
+	static double previous_set_temp_inside = 0;
+	static double previous_current_temp_inside = 0;
 
-	Oled_cursor(oled, 0, 0);
-	memset(set_temp_inside_string, (int)' ', 8);
-	snprintf(set_temp_inside_string,8,"%.1lf",set_temp_inside);
-	Oled_string(oled, set_temp_inside_string);
-	Oled_cursor(oled, 0,6);
-	Oled_string(oled, celsius_unit);
+	if(previous_set_temp_inside != set_temp_inside){
+		previous_set_temp_inside = set_temp_inside;
+		if(set_temp_inside < 10){
+			snprintf(set_temp_inside_string,6,"%.1lf ",set_temp_inside);
+		}
+		else{
+			snprintf(set_temp_inside_string,6,"%.1lf",set_temp_inside);
+		}
+		Oled_cursor(oled, 0, 0);
+		Oled_string(oled, set_temp_inside_string);
+		Oled_cursor(oled, 0,6);
+		Oled_string(oled, celsius_unit);
+	}
 
-	Oled_cursor(oled, 1, 0);
-	memset(current_temp_inside_string, (int)' ', 8);
-	snprintf(current_temp_inside_string,8,"%.1lf",current_temp_inside);
-	Oled_string(oled, current_temp_inside_string);
-	Oled_cursor(oled, 1,6);
-	Oled_string(oled, celsius_unit);
+	if(previous_current_temp_inside != current_temp_inside){
+		previous_current_temp_inside = current_temp_inside;
+		if(current_temp_inside < 10){
+			snprintf(current_temp_inside_string,6,"%.1lf ",current_temp_inside);
+		}
+		else{
+			snprintf(current_temp_inside_string,6,"%.1lf",current_temp_inside);
+		}
+		Oled_cursor(oled, 1, 0);
+		Oled_string(oled, current_temp_inside_string);
+		Oled_cursor(oled, 1,6);
+		Oled_string(oled, celsius_unit);
+	}
 }
 
+// Unfinished function. Wanted to resupply the power the the OLED every time MCU restarts cause otherwise the gibberish is displayed
 void Oled_resupply_power(Oled_HandleTypeDef *oled){
 	uint8_t command = OLED_PWRDWN;
 	Oled_writeCommand(oled,command);
